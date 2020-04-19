@@ -1,0 +1,29 @@
+#pragma once
+#include <QtWidgets/QMainWindow>
+#include "ui_MainWindow.h"
+#include "SaleWindow.h"
+#include "ReportWindow.h"
+#include "MainWindow.h"
+#include "ManageWindow.h"
+class MainWindow : public QMainWindow
+{
+	Q_OBJECT
+
+public:
+	MainWindow(QWidget *parent = Q_NULLPTR);
+	~MainWindow();
+public slots:
+	void on_ButtonSale_clicked();
+	void on_ButtonManage_clicked();
+	void on_ButtonReport_clicked();
+	void on_ButtonExit_clicked();
+	void CloseSon(std::string);
+	void on_About_triggered();
+
+private:
+	Ui::MainWindowClass ui;
+	SaleWindow *sale_window;
+	ManageWindow *manage_window;
+	ReportWindow *report_window;
+	void closeEvent(QCloseEvent* event);
+};
