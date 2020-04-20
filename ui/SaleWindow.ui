@@ -21,108 +21,6 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
-    <item row="2" column="0" colspan="3">
-     <widget class="QTableWidget" name="SaleList">
-      <property name="minimumSize">
-       <size>
-        <width>0</width>
-        <height>0</height>
-       </size>
-      </property>
-      <property name="statusTip">
-       <string/>
-      </property>
-      <property name="gridStyle">
-       <enum>Qt::SolidLine</enum>
-      </property>
-      <attribute name="horizontalHeaderVisible">
-       <bool>true</bool>
-      </attribute>
-      <attribute name="horizontalHeaderCascadingSectionResizes">
-       <bool>true</bool>
-      </attribute>
-      <attribute name="horizontalHeaderMinimumSectionSize">
-       <number>10</number>
-      </attribute>
-      <attribute name="horizontalHeaderDefaultSectionSize">
-       <number>150</number>
-      </attribute>
-      <attribute name="horizontalHeaderHighlightSections">
-       <bool>true</bool>
-      </attribute>
-      <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
-       <bool>false</bool>
-      </attribute>
-      <attribute name="horizontalHeaderStretchLastSection">
-       <bool>true</bool>
-      </attribute>
-      <attribute name="verticalHeaderMinimumSectionSize">
-       <number>10</number>
-      </attribute>
-      <column>
-       <property name="text">
-        <string>书名</string>
-       </property>
-       <property name="font">
-        <font>
-         <kerning>true</kerning>
-        </font>
-       </property>
-       <property name="textAlignment">
-        <set>AlignCenter</set>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>单价</string>
-       </property>
-       <property name="textAlignment">
-        <set>AlignCenter</set>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>数量</string>
-       </property>
-       <property name="textAlignment">
-        <set>AlignCenter</set>
-       </property>
-      </column>
-     </widget>
-    </item>
-    <item row="1" column="0">
-     <layout class="QHBoxLayout" name="horizontalLayout_4">
-      <property name="rightMargin">
-       <number>130</number>
-      </property>
-      <item>
-       <widget class="QPushButton" name="Find">
-        <property name="maximumSize">
-         <size>
-          <width>80</width>
-          <height>16777215</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>查找</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="Library">
-        <property name="maximumSize">
-         <size>
-          <width>80</width>
-          <height>16777215</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>书库</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </item>
     <item row="0" column="0" colspan="3">
      <layout class="QHBoxLayout" name="horizontalLayout_5">
       <item>
@@ -300,7 +198,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="Detail">
+         <widget class="QPushButton" name="ButtonDetail">
           <property name="text">
            <string>详细信息</string>
           </property>
@@ -317,25 +215,94 @@
       </item>
      </layout>
     </item>
+    <item row="2" column="0" colspan="3">
+     <widget class="QTableWidget" name="SaleList">
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="statusTip">
+       <string/>
+      </property>
+      <property name="gridStyle">
+       <enum>Qt::SolidLine</enum>
+      </property>
+      <attribute name="horizontalHeaderVisible">
+       <bool>true</bool>
+      </attribute>
+      <attribute name="horizontalHeaderCascadingSectionResizes">
+       <bool>true</bool>
+      </attribute>
+      <attribute name="horizontalHeaderMinimumSectionSize">
+       <number>10</number>
+      </attribute>
+      <attribute name="horizontalHeaderDefaultSectionSize">
+       <number>150</number>
+      </attribute>
+      <attribute name="horizontalHeaderHighlightSections">
+       <bool>true</bool>
+      </attribute>
+      <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
+       <bool>false</bool>
+      </attribute>
+      <attribute name="horizontalHeaderStretchLastSection">
+       <bool>true</bool>
+      </attribute>
+      <attribute name="verticalHeaderMinimumSectionSize">
+       <number>10</number>
+      </attribute>
+      <column>
+       <property name="text">
+        <string>书名</string>
+       </property>
+       <property name="font">
+        <font>
+         <kerning>true</kerning>
+        </font>
+       </property>
+       <property name="textAlignment">
+        <set>AlignCenter</set>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>单价</string>
+       </property>
+       <property name="textAlignment">
+        <set>AlignCenter</set>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>数量</string>
+       </property>
+       <property name="textAlignment">
+        <set>AlignCenter</set>
+       </property>
+      </column>
+     </widget>
+    </item>
     <item row="3" column="0">
      <layout class="QHBoxLayout" name="horizontalLayout_6">
       <item>
        <layout class="QVBoxLayout" name="verticalLayout_3">
-        <item alignment="Qt::AlignLeft">
+        <item>
          <widget class="QLabel" name="label_2">
           <property name="text">
            <string>总金额：</string>
           </property>
          </widget>
         </item>
-        <item alignment="Qt::AlignLeft">
+        <item>
          <widget class="QLabel" name="label_3">
           <property name="text">
            <string>税：</string>
           </property>
          </widget>
         </item>
-        <item alignment="Qt::AlignLeft">
+        <item>
          <widget class="QLabel" name="label_4">
           <property name="text">
            <string>税后金额：</string>
@@ -395,19 +362,6 @@
       </item>
      </layout>
     </item>
-    <item row="3" column="2">
-     <widget class="QPushButton" name="Sattle">
-      <property name="minimumSize">
-       <size>
-        <width>60</width>
-        <height>40</height>
-       </size>
-      </property>
-      <property name="text">
-       <string>结算</string>
-      </property>
-     </widget>
-    </item>
     <item row="3" column="1">
      <spacer name="horizontalSpacer_2">
       <property name="orientation">
@@ -415,24 +369,69 @@
       </property>
       <property name="sizeHint" stdset="0">
        <size>
-        <width>40</width>
+        <width>593</width>
         <height>20</height>
        </size>
       </property>
      </spacer>
     </item>
-    <item row="1" column="2">
-     <spacer name="horizontalSpacer">
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
+    <item row="3" column="2">
+     <widget class="QPushButton" name="Sattle">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
       </property>
-      <property name="sizeHint" stdset="0">
+      <property name="minimumSize">
        <size>
-        <width>40</width>
-        <height>20</height>
+        <width>60</width>
+        <height>30</height>
        </size>
       </property>
-     </spacer>
+      <property name="maximumSize">
+       <size>
+        <width>200</width>
+        <height>100</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>结算</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="0">
+     <layout class="QHBoxLayout" name="horizontalLayout_4">
+      <property name="rightMargin">
+       <number>130</number>
+      </property>
+      <item>
+       <widget class="QPushButton" name="Find">
+        <property name="maximumSize">
+         <size>
+          <width>80</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>查找</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="Library">
+        <property name="maximumSize">
+         <size>
+          <width>80</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>书库</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </item>
    </layout>
   </widget>

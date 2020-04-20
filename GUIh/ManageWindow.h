@@ -11,6 +11,8 @@ public:
 private:
 	Ui::ManageWindowClass ui;
 	void closeEvent(QCloseEvent* event);
+private slots:
+	void on_ButtonAdd_clicked();
 signals:
 	void Close(std::string);
 	

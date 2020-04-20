@@ -17,7 +17,7 @@ public slots:
 	void on_ButtonManage_clicked();
 	void on_ButtonReport_clicked();
 	void on_ButtonExit_clicked();
-	void CloseSon(std::string);
+	void CloseSon(std::string);//控制子窗口指针，关闭时将指针变为NULL
 	void on_About_triggered();
 
 private:

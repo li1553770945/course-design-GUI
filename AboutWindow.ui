@@ -78,6 +78,9 @@
      <height>16</height>
     </rect>
    </property>
+   <property name="whatsThis">
+    <string>一个热爱代码的单身汪</string>
+   </property>
    <property name="text">
     <string>作者：李亚宁</string>
    </property>

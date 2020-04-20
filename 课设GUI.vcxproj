@@ -61,7 +61,7 @@
       <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <OutputFile>$(OutDir)\$(ProjectName).exe</OutputFile>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
@@ -74,9 +74,10 @@
       <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
     </ClCompile>
     <Link>
-      <SubSystem>Windows</SubSystem>
+      <SubSystem>Console</SubSystem>
       <OutputFile>$(OutDir)\$(ProjectName).exe</OutputFile>
       <GenerateDebugInformation>false</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(Qt_LIBPATH_);%(AdditionalLibraryDirectories),$D:\Qt\Qt5.14.2\5.14.2\msvc2017_64\bin</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -92,6 +93,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="cpp\BookData.cpp" />
+    <ClCompile Include="cpp\global.cpp" />
     <ClCompile Include="cpp\main.cpp" />
     <ClCompile Include="cpp\Management.cpp" />
     <ClCompile Include="cpp\Report.cpp" />
@@ -116,6 +118,7 @@
   <ItemGroup>
     <QtMoc Include="GUIh\AboutWindow.h" />
     <QtMoc Include="GUIh\BookInfoWindow.h" />
+    <ClInclude Include="h\global.h" />
     <ClInclude Include="h\library.h" />
   </ItemGroup>
   <ItemGroup>

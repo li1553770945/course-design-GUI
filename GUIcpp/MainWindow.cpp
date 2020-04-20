@@ -3,6 +3,7 @@
 #include "../GUIh/ReportWindow.h"
 #include "../GUIh/ManageWindow.h"
 #include "../GUIh/AboutWindow.h"
+#include "../h/global.h"
 #include <qmessagebox.h>
 #include <QTextCodec>
 #include <QCloseEvent> 
@@ -37,7 +38,7 @@ MainWindow::~MainWindow()
 }
 void MainWindow::on_ButtonSale_clicked()
 {
-	if (sale_window == NULL)
+	if (sale_window == NULL)//如果为空，说明还没有打开过这个窗口，那么就新建一个并显示
 	{
 		
 		sale_window = new SaleWindow;
@@ -45,7 +46,7 @@ void MainWindow::on_ButtonSale_clicked()
 		sale_window->show();
 		
 	}
-	else
+	else//如果已经打开了，不再重新创建，而是显示原来的
 	{
 		sale_window->showNormal();
 		sale_window->activateWindow();
@@ -89,13 +90,36 @@ void MainWindow::on_ButtonExit_clicked()
 	switch (messageBox.exec())
 	{
 	case QMessageBox::Yes:
+	{
+		if (manage_window)
+		{
+			manage_window->close();
+			delete manage_window;
+		}
+		if (report_window)
+		{
+			report_window->close();
+			delete report_window;
+		}
+		if (sale_window)
+		{
+			sale_window->close();
+			delete sale_window;
+		}
 		exit(0);
+	}
 	default:
 		return;
 	}
 }
 void MainWindow::closeEvent(QCloseEvent* event)
 {
+	fstream file;
+	file.open("book.data", ios::out | ios::binary);
+	for (auto book : books)
+	{
+		file.write((char*)&book, sizeof(book));
+	}
 	on_ButtonExit_clicked();
 	event->ignore();
 }
@@ -117,5 +141,5 @@ void MainWindow::CloseSon(std::string name)
 void MainWindow::on_About_triggered()
 {
 	AboutWindow* about_window = new AboutWindow;
-	about_window->show();
+	about_window->exec();
 }

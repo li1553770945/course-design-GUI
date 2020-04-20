@@ -64,4 +64,3 @@ public:
 	static void SortWholesale(list<Sale>& books);
 	static void SortDate(list<Sale>& books);
 };
-extern list<Sale> books;

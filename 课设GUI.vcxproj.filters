@@ -101,9 +101,15 @@
     <ClCompile Include="GUIcpp\AboutWindow.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="cpp\global.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="h\library.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\global.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

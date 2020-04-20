@@ -4,11 +4,14 @@
 #include <qdebug.h>
 #include "../h/library.h"
 #include <iostream>
+#include "../h/global.h"
+#include "../GUIh//BookInfoWindow.h"
 # pragma execution_character_set("utf-8")
 SaleWindow::SaleWindow(QWidget* parent)
 	: QMainWindow(parent)
 {
 	ui.setupUi(this);
+	book = NULL;
 }
 void SaleWindow::on_Confirm_clicked()
 {
@@ -21,8 +24,7 @@ void SaleWindow::on_Confirm_clicked()
 	}
 	else
 	{
-		qDebug() << it->GetQty();
-		std::cout << it->GetName();
+		book = &*it;
 		ui.Name->setText(QString::fromLocal8Bit(it->GetName()));
 		ui.Qty->setText(QString::number(it->GetQty()));
 	}
@@ -34,4 +36,19 @@ void SaleWindow::closeEvent(QCloseEvent* event)
 void SaleWindow::on_ISBN_returnPressed()
 {
 	on_Confirm_clicked();
+}
+void SaleWindow::on_ButtonDetail_clicked()
+{
+	if (book == NULL)
+	{
+		QMessageBox box(QMessageBox::Information, "提示", "请先选择一本书");
+		box.exec();
+	}
+	else
+	{
+		BookInfoWindow* book_info_window = new BookInfoWindow();
+		connect(this, SIGNAL(SendBookPtr(Sale*)), book_info_window, SLOT(ReceiveBookPtr(Sale*)));
+		emit SendBookPtr(book);
+		book_info_window->show();
+	}
 }
