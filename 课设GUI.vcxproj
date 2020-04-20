@@ -81,7 +81,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <QtUic Include="AboutWindow.ui" />
+    <QtUic Include="ui\AboutWindow.ui" />
     <QtUic Include="ui\BookInfoWindow.ui" />
     <QtUic Include="ui\MainWindow.ui" />
     <QtUic Include="ui\ManageWindow.ui" />

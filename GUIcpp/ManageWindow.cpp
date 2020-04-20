@@ -28,7 +28,14 @@ void ManageWindow::on_ButtonAdd_clicked()
 	}//设置书名
 	try
 	{
+		
 		QByteArray ba = ui.ISBNAdd->text().toLocal8Bit();
+		if (Management::FindISBN(books.begin(), books.end(), ba.data())!=books.end());
+		{
+			QMessageBox box(QMessageBox::Warning, "提示","该ISBN已经存在！");
+			box.exec();
+			return;
+		}
 		book.SetISBN(ba.data());
 	}
 	catch (const char* err)
@@ -101,6 +108,11 @@ void ManageWindow::on_ButtonAdd_clicked()
 	}//设置批发价
 	cout << book.GetName();
 	books.push_back(book);
+	QList<QLineEdit*> line_list = ui.TabAdd->findChildren<QLineEdit*>();
+	for (auto line_edit : line_list)
+	{
+		line_edit->setText("");
+	}
 	QMessageBox box(QMessageBox::Information, "提示", "添加成功！");
 	box.exec();
 }

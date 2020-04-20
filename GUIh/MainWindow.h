@@ -11,7 +11,6 @@ class MainWindow : public QMainWindow
 
 public:
 	MainWindow(QWidget *parent = Q_NULLPTR);
-	~MainWindow();
 public slots:
 	void on_ButtonSale_clicked();
 	void on_ButtonManage_clicked();
@@ -26,4 +25,5 @@ private:
 	ManageWindow *manage_window;
 	ReportWindow *report_window;
 	void closeEvent(QCloseEvent* event);
+	void LoadFile();
 };

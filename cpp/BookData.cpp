@@ -4,7 +4,7 @@
 using namespace std;
 void BookData::SetDateAdded(const char* const & date)
 {
-	if (!(date[4] == '-' && date[7] == '-'))
+	if (strlen(date)!=9||!(date[4] == '-' && date[7] == '-'))
 	{
 		throw "日期格式不合法，日期格式XXXX-XX-XX";
 	}

@@ -8,6 +8,7 @@
 #include <QTextCodec>
 #include <QCloseEvent> 
 #include <qdebug.h>
+#include <io.h>
 # pragma execution_character_set("utf-8")
 MainWindow::MainWindow(QWidget *parent)
 	: QMainWindow(parent)
@@ -15,26 +16,37 @@ MainWindow::MainWindow(QWidget *parent)
 	sale_window=NULL;
 	manage_window = NULL;
 	report_window=NULL;
+	LoadFile();
 	ui.setupUi(this);
 	setAttribute(Qt::WA_DeleteOnClose);
 }
-MainWindow::~MainWindow()
+
+void MainWindow::LoadFile()
 {
-	if (sale_window != NULL)
+	fstream  file;
+	if (_access("book.data", 0) == -1)
 	{
-		sale_window->close();
-		delete sale_window;
+		QMessageBox box(QMessageBox::Information, "提示", "没有找到书库文件，将尝试创建。");
+		box.exec();
+		file.open("book.data", ios::out);
+		file.close();
 	}
-	if (manage_window != NULL)
+	file.open("book.data", ios::binary | ios::in | ios::out);
+	if (!file.is_open())
 	{
-		manage_window->close();
-		delete manage_window;
-	}
-	if (report_window != NULL)
+		QMessageBox box(QMessageBox::Critical, "错误", "无法打开书库文件！");
+		box.exec();
+		exit(EXIT_FAILURE);
+	}//读取文件
+	while (!file.eof())
 	{
-		report_window->close();
-		delete report_window;
-	}
+		Sale temp;
+		file.read((char*)&temp, sizeof(Sale));
+		if (file.fail())
+			break;
+		books.push_back(temp);
+	}//读入到books链表
+	file.close();
 }
 void MainWindow::on_ButtonSale_clicked()
 {

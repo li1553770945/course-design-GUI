@@ -37,10 +37,10 @@
     <QtUic Include="ui\ManageWindow.ui">
       <Filter>Form Files</Filter>
     </QtUic>
-    <QtUic Include="AboutWindow.ui">
+    <QtUic Include="ui\BookInfoWindow.ui">
       <Filter>Form Files</Filter>
     </QtUic>
-    <QtUic Include="ui\BookInfoWindow.ui">
+    <QtUic Include="ui\AboutWindow.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>
