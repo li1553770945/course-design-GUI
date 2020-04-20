@@ -9,8 +9,8 @@ public:
 	BookInfoWindow(QWidget* parent = Q_NULLPTR);
 	void Set();
 private slots:
-	void ReceiveBookPtr(Sale*);
+	void ReceiveBookPtr(const BookData* );
 private:
 	Ui::BookInfoWindowClass ui;
-	Sale* book;
+	const BookData* book;
 };

@@ -32,19 +32,23 @@ void BookData::SetRetail(double price)
 		throw "º€∏Ò ‰»Î¥ÌŒÛ£°";
 	_retail = price;
 }
-const char* BookData::GetDateAdded()
+const char* BookData::GetDateAdded()const
 {
 	return _date_added;
 }
-double BookData::GetWholesale()
+double BookData::GetWholesale()const
 {
 	return _whosale;
 }
-double BookData::GetRetail()
+double BookData::GetRetail()const
 {
 	return _retail;
 }
-int BookData::GetQty()
+int BookData::GetQty()const 
 {
 	return _qty;
+}
+bool BookData::operator<(const BookData &rhs)const 
+{
+	return strcmp(_isbn, rhs.GetISBN());
 }

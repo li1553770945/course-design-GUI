@@ -86,12 +86,6 @@
     <ClCompile Include="cpp\Management.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="cpp\Report.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="cpp\Sale.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="cpp\TitleInfo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

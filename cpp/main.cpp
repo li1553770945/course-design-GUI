@@ -7,7 +7,7 @@
 #include "../h/library.h"
 #include "qmessagebox.h"
 using namespace std;
-list<Sale> books;
+set<BookData> books;
 int main(int argc, char *argv[])
 {
 	

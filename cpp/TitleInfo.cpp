@@ -35,19 +35,19 @@ void TitleInfo::SetPub(const char* const &Pub)
 		throw "«Î ‰»Î≥ˆ∞Ê…Á£°";
 	strcpy(_publisher ,Pub);
 }
-const char* TitleInfo::GetISBN()
+const char* TitleInfo::GetISBN()const 
 {
 	return _isbn;
 }
-const char* TitleInfo::GetName()
+const char* TitleInfo::GetName()const
 {
 	return _name;
 }
-const char* TitleInfo::GetAuth()
+const char* TitleInfo::GetAuth()const
 {
 	return _author;
 }
-const char* TitleInfo::GetPub()
+const char* TitleInfo::GetPub()const
 {
 	return _publisher;
 }

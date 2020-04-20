@@ -1,4 +1,5 @@
 #include "../GUIh/BookInfoWindow.h"
+#include <qdebug.h>
 BookInfoWindow::BookInfoWindow(QWidget* parent)
 	: QMainWindow(parent)
 {
@@ -16,7 +17,7 @@ void BookInfoWindow::Set()
 	ui.Wholesale->setText(QString::number(book->GetWholesale(),10,2));
 	ui.Qty->setText(QString::number(book->GetQty()));
 }
-void BookInfoWindow::ReceiveBookPtr(Sale* ptr)
+void BookInfoWindow::ReceiveBookPtr(const BookData* ptr)
 {
 	book = ptr;
 	Set();

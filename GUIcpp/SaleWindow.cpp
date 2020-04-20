@@ -15,8 +15,7 @@ SaleWindow::SaleWindow(QWidget* parent)
 }
 void SaleWindow::on_Confirm_clicked()
 {
-	qDebug() << "确定按钮";
-	list<Sale>::iterator it = Management::FindISBN(books.begin(), books.end(), ui.ISBN->text().toLatin1().data());
+	set<BookData>::iterator it = Management::FindISBN(books.begin(), books.end(), ui.ISBN->text().toLatin1().data());
 	if (it == books.end())
 	{
 		QMessageBox message_box(QMessageBox::Warning, "提示", "ISBN输入错误，请重新输入!", QMessageBox::Yes);
@@ -27,6 +26,7 @@ void SaleWindow::on_Confirm_clicked()
 		book = &*it;
 		ui.Name->setText(QString::fromLocal8Bit(it->GetName()));
 		ui.Qty->setText(QString::number(it->GetQty()));
+		ui.Retail->setText(QString::number(it->GetRetail(),10,2));
 	}
 }
 void SaleWindow::closeEvent(QCloseEvent* event)
@@ -47,7 +47,7 @@ void SaleWindow::on_ButtonDetail_clicked()
 	else
 	{
 		BookInfoWindow* book_info_window = new BookInfoWindow();
-		connect(this, SIGNAL(SendBookPtr(Sale*)), book_info_window, SLOT(ReceiveBookPtr(Sale*)));
+		connect(this, SIGNAL(SendBookPtr(const BookData*)), book_info_window, SLOT(ReceiveBookPtr(const BookData*)));
 		emit SendBookPtr(book);
 		book_info_window->show();
 	}

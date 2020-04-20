@@ -40,11 +40,11 @@ void MainWindow::LoadFile()
 	}//读取文件
 	while (!file.eof())
 	{
-		Sale temp;
-		file.read((char*)&temp, sizeof(Sale));
+		BookData temp;
+		file.read((char*)&temp, sizeof(BookData));
 		if (file.fail())
 			break;
-		books.push_back(temp);
+		books.insert(temp);
 	}//读入到books链表
 	file.close();
 }
