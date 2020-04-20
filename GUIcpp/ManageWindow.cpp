@@ -30,7 +30,7 @@ void ManageWindow::on_ButtonAdd_clicked()
 	{
 		
 		QByteArray ba = ui.ISBNAdd->text().toLocal8Bit();
-		if (Management::FindISBN(books.begin(), books.end(), ba.data())!=books.end());
+		if (Management::FindISBN(books.begin(), books.end(), ba.data())!=books.end())
 		{
 			QMessageBox box(QMessageBox::Warning, "提示","该ISBN已经存在！");
 			box.exec();
@@ -88,7 +88,7 @@ void ManageWindow::on_ButtonAdd_clicked()
 	}//设置零售价
 	try
 	{
-		book.SetWholesale(atof(ui.NameAdd->text().toLatin1().data()));
+		book.SetWholesale(atof(ui.WholesaleAdd->text().toLatin1().data()));
 	}//TODO:不能解决输入错误
 	catch (const char* err)
 	{
