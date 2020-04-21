@@ -118,6 +118,13 @@ void MainWindow::on_ButtonExit_clicked()
 			sale_window->close();
 			delete sale_window;
 		}
+		fstream file;
+		file.open("book.data", ios::out | ios::binary);
+		for (auto book : books)
+		{
+			file.write((char*)&book, sizeof(book));
+		}
+		file.close();
 		exit(0);
 	}
 	default:
@@ -126,12 +133,7 @@ void MainWindow::on_ButtonExit_clicked()
 }
 void MainWindow::closeEvent(QCloseEvent* event)
 {
-	fstream file;
-	file.open("book.data", ios::out | ios::binary);
-	for (auto book : books)
-	{
-		file.write((char*)&book, sizeof(book));
-	}
+	
 	on_ButtonExit_clicked();
 	event->ignore();
 }

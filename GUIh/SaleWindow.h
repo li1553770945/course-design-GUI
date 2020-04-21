@@ -20,5 +20,6 @@ private slots:
 	void on_Confirm_clicked();
 	void on_ISBN_returnPressed();
 	void on_ButtonDetail_clicked();
+	void on_ButtonLibrary_clicked();
 	
 };

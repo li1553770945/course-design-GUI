@@ -1,12 +1,15 @@
 #include "../GUIh/BookInfoWindow.h"
 #include <qdebug.h>
+#include <QtWidgets/QMainWindow>
 BookInfoWindow::BookInfoWindow(QWidget* parent)
-	: QMainWindow(parent)
+	: QDialog(parent)
 {
-	ui.setupUi(this);
+	
 	book = NULL;
+	setAttribute(Qt::WA_DeleteOnClose);
+	ui.setupUi(this);
 }
-void BookInfoWindow::Set()
+void BookInfoWindow::SetData()
 {
 	ui.Name->setText(QString::fromLocal8Bit(book->GetName()));
 	ui.Author->setText(QString::fromLocal8Bit(book->GetAuth()));
@@ -20,5 +23,5 @@ void BookInfoWindow::Set()
 void BookInfoWindow::ReceiveBookPtr(const BookData* ptr)
 {
 	book = ptr;
-	Set();
+	SetData();
 }

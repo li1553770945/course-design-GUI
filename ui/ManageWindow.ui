@@ -126,21 +126,6 @@
             </property>
            </widget>
           </item>
-          <item row="4" column="2">
-           <widget class="QLineEdit" name="DateAddedAdd">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="font">
-             <font>
-              <pointsize>12</pointsize>
-             </font>
-            </property>
-           </widget>
-          </item>
           <item row="8" column="2">
            <widget class="QLineEdit" name="WholesaleAdd">
             <property name="sizePolicy">
@@ -218,6 +203,16 @@
             </property>
            </widget>
           </item>
+          <item row="4" column="2">
+           <widget class="QDateEdit" name="DateAddedAdd">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+           </widget>
+          </item>
          </layout>
         </item>
         <item row="1" column="0">
@@ -262,7 +257,7 @@
          </layout>
         </item>
         <item row="0" column="1">
-         <widget class="QPushButton" name="ButtonConfirm">
+         <widget class="QPushButton" name="ButtonISBNConfirm">
           <property name="text">
            <string>确定</string>
           </property>
@@ -380,21 +375,6 @@
             </property>
            </widget>
           </item>
-          <item row="4" column="1">
-           <widget class="QLineEdit" name="DateAddedEdit">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="font">
-             <font>
-              <pointsize>12</pointsize>
-             </font>
-            </property>
-           </widget>
-          </item>
           <item row="0" column="0">
            <widget class="QLabel" name="label_15">
             <property name="text">
@@ -449,6 +429,16 @@
             </property>
            </widget>
           </item>
+          <item row="4" column="1">
+           <widget class="QDateEdit" name="DateAddedEdit">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+           </widget>
+          </item>
          </layout>
         </item>
         <item row="2" column="0">
@@ -468,6 +458,9 @@
          <layout class="QHBoxLayout" name="horizontalLayout_2">
           <item>
            <widget class="QPushButton" name="ButtonSave">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
             <property name="text">
              <string>保存</string>
             </property>
@@ -475,6 +468,9 @@
           </item>
           <item>
            <widget class="QPushButton" name="ButtonDelete">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
             <property name="text">
              <string>删除</string>
             </property>
@@ -517,7 +513,7 @@
          </spacer>
         </item>
         <item row="1" column="1">
-         <widget class="QPushButton" name="pushButton">
+         <widget class="QPushButton" name="ButtonFaxConfirm">
           <property name="text">
            <string>确定</string>
           </property>
@@ -546,7 +542,6 @@
   <tabstop>ISBNAdd</tabstop>
   <tabstop>AuthorAdd</tabstop>
   <tabstop>PublisherAdd</tabstop>
-  <tabstop>DateAddedAdd</tabstop>
   <tabstop>QtyAdd</tabstop>
   <tabstop>RetailAdd</tabstop>
   <tabstop>WholesaleAdd</tabstop>
@@ -555,17 +550,16 @@
   <tabstop>ISBNEdit</tabstop>
   <tabstop>AuthorEdit</tabstop>
   <tabstop>PublisherEdit</tabstop>
-  <tabstop>DateAddedEdit</tabstop>
   <tabstop>QtyEdit</tabstop>
   <tabstop>RetailEdit</tabstop>
   <tabstop>WholesaleEdit</tabstop>
-  <tabstop>ButtonConfirm</tabstop>
+  <tabstop>ButtonISBNConfirm</tabstop>
   <tabstop>TabClass</tabstop>
   <tabstop>ButtonAdd</tabstop>
   <tabstop>ButtonSave</tabstop>
   <tabstop>ButtonDelete</tabstop>
   <tabstop>lineEdit_9</tabstop>
-  <tabstop>pushButton</tabstop>
+  <tabstop>ButtonFaxConfirm</tabstop>
  </tabstops>
  <resources/>
  <connections/>

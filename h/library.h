@@ -18,7 +18,7 @@ public:
 class BookData :public TitleInfo {//书的所有信息，可变的，数量等
 protected:
 
-	char _date_added[11];
+	char _date_added[15];
 	int _qty;
 	double _whosale, _retail;//批发价、零售价
 public:

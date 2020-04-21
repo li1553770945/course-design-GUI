@@ -6,10 +6,12 @@
 #include <iostream>
 #include "../h/global.h"
 #include "../GUIh//BookInfoWindow.h"
+#include "../GUIh/ReportWindow.h"
 # pragma execution_character_set("utf-8")
 SaleWindow::SaleWindow(QWidget* parent)
 	: QMainWindow(parent)
 {
+	setAttribute(Qt::WA_DeleteOnClose);
 	ui.setupUi(this);
 	book = NULL;
 }
@@ -46,9 +48,14 @@ void SaleWindow::on_ButtonDetail_clicked()
 	}
 	else
 	{
-		BookInfoWindow* book_info_window = new BookInfoWindow();
+		BookInfoWindow* book_info_window = new BookInfoWindow;
 		connect(this, SIGNAL(SendBookPtr(const BookData*)), book_info_window, SLOT(ReceiveBookPtr(const BookData*)));
 		emit SendBookPtr(book);
-		book_info_window->show();
+		book_info_window->exec();
 	}
+}
+void SaleWindow::on_ButtonLibrary_clicked()
+{
+	ReportWindow *report_window=new ReportWindow ;
+	report_window->show();
 }

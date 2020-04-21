@@ -4,14 +4,8 @@
 using namespace std;
 void BookData::SetDateAdded(const char* const & date)
 {
-	if (strlen(date)!=10||!(date[4] == '-' && date[7] == '-'))
-	{
-		throw "日期格式不合法，日期格式XXXX-XX-XX";
-	}
-	else
-	{
-		strcpy(_date_added, date);
-	}
+	
+	strcpy(_date_added, date);
 	
 }
 void BookData::SetQty(int qty)
@@ -50,5 +44,5 @@ int BookData::GetQty()const
 }
 bool BookData::operator<(const BookData &rhs)const 
 {
-	return strcmp(_isbn, rhs.GetISBN());
+	return strcmp(_isbn, rhs.GetISBN())<0;
 }

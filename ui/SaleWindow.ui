@@ -351,7 +351,7 @@
        <number>130</number>
       </property>
       <item>
-       <widget class="QPushButton" name="Find">
+       <widget class="QPushButton" name="ButtonFind">
         <property name="maximumSize">
          <size>
           <width>80</width>
@@ -364,7 +364,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="Library">
+       <widget class="QPushButton" name="ButtonLibrary">
         <property name="maximumSize">
          <size>
           <width>80</width>

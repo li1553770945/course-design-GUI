@@ -1,5 +1,4 @@
 #pragma once
-#include <QtWidgets/QMainWindow>
 #include "ui_AboutWindow.h"
 class AboutWindow : public QDialog
 {
