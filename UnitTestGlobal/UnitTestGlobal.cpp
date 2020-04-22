@@ -13,8 +13,9 @@ namespace UnitTestGlobal
 		TEST_METHOD(TestMethod1)
 		{
 			Assert::AreEqual(123, my_atoi("123"));
-			Assert::AreEqual(12.5, my_atof("12.5"));
-			Assert::AreEqual(-1.0, my_atof("double"));
+			Assert::AreEqual(-1, my_atoi("测试"));
+			Assert::AreEqual(-1.0, my_atof("测试"));
+			Assert::AreEqual(666.6, my_atof("666.6"));
 		}
 	};
 }
