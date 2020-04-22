@@ -20,7 +20,7 @@ void ManageWindow::on_ButtonAdd_clicked()
 	{
 		QByteArray ba = ui.NameAdd->text().toLocal8Bit();
 		book.SetName(ba.data());//设置书名
-		if (Management::FindISBN(books.begin(), books.end(), ui.ISBNAdd->text().toLatin1().data()) != books.end())
+		if (Management::FindISBN(books,  ui.ISBNAdd->text().toLatin1().data()))
 		{
 			QMessageBox box(QMessageBox::Information, "提示", "该ISBN已经存在！");
 			box.exec();
@@ -34,8 +34,8 @@ void ManageWindow::on_ButtonAdd_clicked()
 		ba = ui.PublisherAdd->text().toLocal8Bit();//设置出版社
 		book.SetPub(ba.data());//设置出版社
 		book.SetQty(my_atoi(ui.QtyAdd->text().toLatin1().data()));//设置库存
-		book.SetRetail(atof(ui.RetailAdd->text().toLatin1().data()));//设置零售价
-		book.SetWholesale(atof(ui.WholesaleAdd->text().toLatin1().data()));//设置批发价
+		book.SetRetail(my_atof(ui.RetailAdd->text().toLatin1().data()));//设置零售价
+		book.SetWholesale(my_atof(ui.WholesaleAdd->text().toLatin1().data()));//设置批发价
 		ba = ui.DateAddedAdd->date().toString("yyyy-MM-dd").toLatin1(); // must
 		book.SetDateAdded(ba.data());//设置进货日期
 	}
@@ -56,8 +56,8 @@ void ManageWindow::on_ButtonAdd_clicked()
 }
 void ManageWindow::on_ButtonISBNConfirm_clicked()
 {
-	set<BookData>::iterator it = Management::FindISBN(books.begin(), books.end(), ui.ISBNInput->text().toLatin1().data());
-	if (it == books.end())
+	set<BookData>::iterator it; 
+	if (!Management::FindISBN(books,it, ui.ISBNInput->text().toLatin1().data()))
 	{
 		QMessageBox message_box(QMessageBox::Warning, "提示", "ISBN输入错误，请重新输入!", QMessageBox::Yes);
 		message_box.exec();
@@ -112,8 +112,9 @@ void ManageWindow::on_ButtonSave_clicked()
 	{
 		QByteArray ba = ui.NameEdit->text().toLocal8Bit();
 		book.SetName(ba.data());//设置书名
-		set<BookData>::iterator find_it=Management::FindISBN(books.begin(), books.end(), ui.ISBNEdit->text().toLatin1().data());
-		if (find_it!=books.end()&&find_it!=current_edit_book)
+		set<BookData>::iterator find_it;
+			
+		if (!Management::FindISBN(books,find_it, ui.ISBNEdit->text().toLatin1().data())&&find_it!=current_edit_book)
 		{
 			QMessageBox box(QMessageBox::Information, "提示", "该ISBN已经存在！");
 			box.exec();
@@ -127,8 +128,8 @@ void ManageWindow::on_ButtonSave_clicked()
 		ba = ui.PublisherEdit->text().toLocal8Bit();//设置出版社
 		book.SetPub(ba.data());//设置出版社
 		book.SetQty(my_atoi(ui.QtyEdit->text().toLatin1().data()));//设置库存
-		book.SetRetail(atof(ui.RetailEdit->text().toLatin1().data()));//设置零售价
-		book.SetWholesale(atof(ui.WholesaleEdit->text().toLatin1().data()));//设置批发价
+		book.SetRetail(my_atof(ui.RetailEdit->text().toLatin1().data()));//设置零售价
+		book.SetWholesale(my_atof(ui.WholesaleEdit->text().toLatin1().data()));//设置批发价
 		ba = ui.DateAddedEdit->date().toString("yyyy-MM-dd").toLatin1(); // must
 		book.SetDateAdded(ba.data());//设置进货日期
 	}

@@ -34,7 +34,7 @@ void MainWindow::LoadFile()
 	file.open("book.data", ios::binary | ios::in | ios::out);
 	if (!file.is_open())
 	{
-		QMessageBox box(QMessageBox::Critical, "错误", "无法打开书库文件！");
+		QMessageBox box(QMessageBox::Critical, "错误", "无法打开书库文件！这可能是因为权限或文件正在被其他程序使用而导致。");
 		box.exec();
 		exit(EXIT_FAILURE);
 	}//读取文件

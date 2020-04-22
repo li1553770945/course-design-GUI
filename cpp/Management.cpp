@@ -1,19 +1,37 @@
 #include <bits/stdc++.h>
 #include "../h/library.h"
 using namespace std;
-set<BookData>::iterator Management::FindISBN(set<BookData>::iterator const& begin, set<BookData>::iterator const& end,const char* const& isbn)
+bool Management::FindISBN(set<BookData>const& books, set<BookData>::iterator &it,const char* const& isbn)
 {
-	return find_if(begin, end, [isbn](const BookData& rhs) {return !strcmp(rhs.GetISBN(), isbn); });
+	BookData temp;
+	try
+	{
+		temp.SetISBN(isbn);
+	}
+	catch (const char*)
+	{
+		return false;
+	}
+	it = books.find(temp);
+	if (it == books.end())
+		return false;
+	else
+		return true;
 }
-set<BookData>::iterator Management::FindName(set<BookData>::iterator const& begin, set<BookData>::iterator const& end,const char* const& name)
+bool Management::FindISBN(set<BookData>const& books, const char* const& isbn)
 {
-	return find_if(begin, end, [name](const BookData& rhs) {return !strcmp(rhs.GetName(), name); });
+	BookData temp;
+	try
+	{
+		temp.SetISBN(isbn);
+	}
+	catch (const char*)
+	{
+		return false;
+	}
+	if (books.find(temp) == books.end())
+		return false;
+	else
+		return true;
 }
-set<BookData>::iterator Management::FuzzySearch(set<BookData>::iterator const& begin, set<BookData>::iterator const& end, const char* const& name)
-{
-	return find_if(begin, end, [name](const BookData& rhs) {return string(rhs.GetName()).find(name)!=string::npos|| string(rhs.GetAuth()).find(name) != string::npos || string(rhs.GetPub()).find(name) != string::npos; });
-}
-set<BookData>::iterator Management::FuzzySearchName(set<BookData>::iterator const& begin, set<BookData>::iterator const& end, const char* const& name)
-{
-	return find_if(begin, end, [name](const BookData& rhs) {return string(rhs.GetName()).find(name) != string::npos; });
-}
+

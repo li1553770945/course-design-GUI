@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>990</width>
-    <height>824</height>
+    <width>1035</width>
+    <height>809</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -213,13 +213,19 @@
         </item>
         <item>
          <widget class="QPushButton" name="ButtonDetail">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
           <property name="text">
            <string>详细信息</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="Add">
+         <widget class="QPushButton" name="ButtonAddToCart">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
           <property name="text">
            <string>添加到购物车</string>
           </property>
@@ -243,7 +249,7 @@
         <item>
          <widget class="QLabel" name="label_3">
           <property name="text">
-           <string>税：</string>
+           <string>执行税率：</string>
           </property>
          </widget>
         </item>
@@ -321,7 +327,7 @@
      </spacer>
     </item>
     <item row="3" column="2">
-     <widget class="QPushButton" name="Sattle">
+     <widget class="QPushButton" name="ButtonSattle">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
         <horstretch>0</horstretch>
@@ -379,7 +385,7 @@
      </layout>
     </item>
     <item row="2" column="0" colspan="3">
-     <widget class="QTableWidget" name="SaleList">
+     <widget class="QTableWidget" name="TableCart">
       <property name="minimumSize">
        <size>
         <width>0</width>
@@ -388,6 +394,9 @@
       </property>
       <property name="statusTip">
        <string/>
+      </property>
+      <property name="editTriggers">
+       <set>QAbstractItemView::DoubleClicked|QAbstractItemView::EditKeyPressed|QAbstractItemView::SelectedClicked</set>
       </property>
       <property name="gridStyle">
        <enum>Qt::SolidLine</enum>
@@ -462,7 +471,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>990</width>
+     <width>1035</width>
      <height>26</height>
     </rect>
    </property>
@@ -470,7 +479,7 @@
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <tabstops>
-  <tabstop>Add</tabstop>
+  <tabstop>ButtonAddToCart</tabstop>
   <tabstop>Confirm</tabstop>
  </tabstops>
  <resources/>

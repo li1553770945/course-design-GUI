@@ -33,11 +33,15 @@ public:
 	bool operator <(const BookData& rhs)const;
 
 };
+class Sale {
+private:
+	static double _fax_;
+public:
+	static double GetFax();
+	static void SetFax(double fax);
+};
 class Management {
 public:
-	static set<BookData>::iterator FindISBN(set<BookData>::iterator const &, set<BookData>::iterator const &,const char* const&);//根据ISBN查找书
-	static set<BookData>::iterator FindName(set<BookData>::iterator const & , set<BookData>::iterator const&,const char* const&);
-	static set<BookData>::iterator FuzzySearch(set<BookData>::iterator const& begin, set<BookData>::iterator const& end, const char* const& str);//模糊查找，书名、出版社、作者中包含关键字
-	static set<BookData>::iterator FuzzySearchName(set<BookData>::iterator const& begin, set<BookData>::iterator const& end, const char* const& name);//模糊查找，书名中包含关键字
-
+	static bool FindISBN(set<BookData> const &, set<BookData>::iterator  &,const char* const&);//根据ISBN查找书
+	static bool FindISBN(set<BookData>const&,  const char* const&);//根据ISBN查找书
 };

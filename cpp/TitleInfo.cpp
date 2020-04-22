@@ -16,6 +16,10 @@ void TitleInfo::SetISBN(const char* const&isbn)
 		throw "ISBN编号不能超过13个字符！";
 	if (strlen(isbn) == 0)
 		throw "请输入ISBN";
+	for (int i = 0; i < strlen(isbn); i++)
+		if (!(isbn[i] >= '0' && isbn[i] <= '9'))
+			throw "ISBN只能是纯数字！";
+
 	strcpy(_isbn, isbn);
 }
 void TitleInfo::SetAuthor(const char * const&auth)
