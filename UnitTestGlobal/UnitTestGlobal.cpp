@@ -4,18 +4,24 @@
 #include "../cpp/global.cpp"
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
-namespace UnitTestGlobal
+namespace TestTranslate
 {
-	TEST_CLASS(UnitTestGlobal)
+	TEST_CLASS(TestAtoi)
 	{
 	public:
 		
-		TEST_METHOD(TestMethod1)
+		TEST_METHOD(Num)
 		{
 			Assert::AreEqual(123, my_atoi("123"));
-			Assert::AreEqual(-1, my_atoi("测试"));
-			Assert::AreEqual(-1.0, my_atof("测试"));
-			Assert::AreEqual(666.6, my_atof("666.6"));
+		}
+	};
+	TEST_CLASS(TestAtof)
+	{
+	public:
+
+		TEST_METHOD(Num)
+		{
+			Assert::AreEqual(123.3, my_atof("123.3"));
 		}
 	};
 }
