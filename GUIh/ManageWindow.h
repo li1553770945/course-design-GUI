@@ -17,7 +17,7 @@ private slots:
 	void on_ButtonAdd_clicked();
 	void on_ButtonISBNConfirm_clicked();
 	void on_ButtonSave_clicked();
-	void on_ButtonDelete_clicked();//TODO:两个函数待实现
+	void on_ButtonDelete_clicked();
 	void on_ISBNInput_returnPressed();
 	
 signals:

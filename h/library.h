@@ -1,7 +1,6 @@
 #pragma once
 #include <bits/stdc++.h>
 using namespace std;
-
 class TitleInfo {//书的基本信息，固定
 protected:
 	char _isbn[13], _name[51], _author[31], _publisher[31];
@@ -33,13 +32,38 @@ public:
 	bool operator <(const BookData& rhs)const;
 
 };
-class Sale {
-private:
-	static double _fax_;
+class Sale;
+class ShoppingItem
+{
+	const BookData* _book_ptr_;
+	int _num_;
 public:
+	ShoppingItem(const BookData* ptr, int num);
+	friend Sale;
+};
+class Sale {
+public:
+	enum AddStatus { //表示添加状态的常数
+	};
+	static constexpr AddStatus SUCCESS = static_cast<AddStatus>(0x01);
+	static constexpr AddStatus EXIST = static_cast<AddStatus>(0x02);
+	static constexpr AddStatus OVERQTY = static_cast<AddStatus>(0x04);
+	Sale();
+	double GetSum();
+	double GetSumFaxed();
 	static double GetFax();
 	static void SetFax(double fax);
+	void Sattle();
+	void AddItem(const BookData* &,int& num,int& status,int& row);//既要返回状态，又要返回插入行，是在无奈，出此对策，传进来状态和行数的引用
+	bool IsEmpty();
+	const BookData* choose_book;
+	int FindItem(const BookData*);
+private:
+	vector <ShoppingItem> _cart_;//购物车
+	static double _fax_;
+	double _sum_;
 };
+
 class Management {
 public:
 	static bool FindISBN(set<BookData> const &, set<BookData>::iterator  &,const char* const&);//根据ISBN查找书

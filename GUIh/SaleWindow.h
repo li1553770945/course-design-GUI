@@ -2,10 +2,11 @@
 #include <QtWidgets/QMainWindow>
 #include "ui_SaleWindow.h"
 #include "../h/library.h"
+#include "../GUIh/FindWindow.h"
+#include "../GUIh/ReportWindow.h"
 class Cart
 {
 public:
-	set<BookData>::iterator book;
 	int num;
 };
 class SaleWindow : public QMainWindow
@@ -19,15 +20,13 @@ signals:
 	void SendBookPtr(const BookData*);
 
 private:
-	double sum_money = 0;
-	double sum_money_faxed = 0;
-	double fax;
+	Sale _sale_;
 	Ui::SaleWindowClass ui;
 	void closeEvent(QCloseEvent* event);
-	set<BookData>::iterator select_book;//当前选择的书的地址
-	vector <Cart> cart;
 	bool select;
 	void Select(bool);
+	ReportWindow* report_window;
+	FindWindow* find_window;
 
 private slots:
 	void on_Confirm_clicked();
@@ -37,5 +36,7 @@ private slots:
 	void on_ButtonAddToCart_clicked();
 	void on_Num_returnPressed();
 	void on_ButtonSattle_clicked();
+	void on_ButtonFind_clicked();
+	void SonClose(std::string);
 };
 

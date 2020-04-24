@@ -21,6 +21,7 @@ private slots:
 	void on_CheckBoxRetail_clicked();
 	void on_CheckBoxWholesale_clicked();
 	void SetData();
+	void ReportWindow::on_ButtonFlush_clicked();
 signals:
 	void Close(std::string);
 };

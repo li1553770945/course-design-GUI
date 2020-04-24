@@ -23,30 +23,47 @@ MainWindow::MainWindow(QWidget *parent)
 
 void MainWindow::LoadFile()
 {
-	fstream  file;
-	if (_access("book.data", 0) == -1)
-	{
-		QMessageBox box(QMessageBox::Information, "提示", "没有找到书库文件，将尝试创建。");
-		box.exec();
-		file.open("book.data", ios::out);
-		file.close();
+	try {
+		OpenFile();
 	}
-	file.open("book.data", ios::binary | ios::in | ios::out);
-	if (!file.is_open())
+	catch (FileStatus err)
 	{
-		QMessageBox box(QMessageBox::Critical, "错误", "无法打开书库文件！这可能是因为权限或文件正在被其他程序使用而导致。");
-		box.exec();
-		exit(EXIT_FAILURE);
-	}//读取文件
-	while (!file.eof())
-	{
-		BookData temp;
-		file.read((char*)&temp, sizeof(BookData));
-		if (file.fail())
-			break;
-		books.insert(temp);
-	}//读入到books链表
-	file.close();
+		if(err==FileStatus::CANNOTOPEN)//无法打开文件
+		{
+			QMessageBox box(QMessageBox::Critical, "错误", "无法打开文件！");
+			box.exec();
+			exit(EXIT_FAILURE);
+		}
+		if (err == FileStatus::NOTEXIST)//文件不存在，就先尝试创建
+		{
+			QMessageBox box(QMessageBox::Warning, "警告", "书库文件不存在，将尝试创建");
+			box.exec();
+			try//尝试创建
+			{
+				CreateFile();
+			}
+			catch (FileStatus error)
+			{
+				if (error == FileStatus::CANNOTCREATE)//创建失败
+				{
+					QMessageBox box(QMessageBox::Critical, "错误", "无法创建书库文件！");
+					box.exec();
+					exit(EXIT_FAILURE);
+				}
+			}
+			try//创建成功，尝试打开
+			{
+				OpenFile();
+			}
+			catch (FileStatus error)
+			{
+				QMessageBox box(QMessageBox::Critical, "错误", "无法打开文件！");
+				box.exec();
+				exit(EXIT_FAILURE);
+			}
+			
+		}
+	}
 }
 void MainWindow::on_ButtonSale_clicked()
 {
@@ -85,7 +102,6 @@ void MainWindow::on_ButtonReport_clicked()
 {
 	if (report_window == NULL)
 	{
-
 		report_window = new ReportWindow;
 		connect(report_window, SIGNAL(Close(std::string)), this, SLOT(CloseSon(std::string)));
 		report_window->show();
@@ -118,13 +134,7 @@ void MainWindow::on_ButtonExit_clicked()
 			sale_window->close();
 			delete sale_window;
 		}
-		fstream file;
-		file.open("book.data", ios::out | ios::binary);
-		for (auto book : books)
-		{
-			file.write((char*)&book, sizeof(book));
-		}
-		file.close();
+		SaveFile();
 		exit(0);
 	}
 	default:

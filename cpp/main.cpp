@@ -1,14 +1,10 @@
 #include "../GUIh/MainWindow.h"
 #include <QtWidgets/QApplication>
-#include <QTextCodec>
-#include <fstream>
-#include <iostream>
-#include <io.h>
 #include "../h/library.h"
 #include "qmessagebox.h"
 #include <qtranslator.h>
+#include "QtTest/qtest.h"
 using namespace std;
-set<BookData> books;
 int main(int argc, char *argv[])
 {
 	

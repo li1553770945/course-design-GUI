@@ -67,13 +67,16 @@ void ReportWindow::on_CheckBoxWholesale_clicked()
 	else
 		ui.Table->setColumnHidden(7, true);
 }
+void ReportWindow::on_ButtonFlush_clicked()
+{
+	SetData();
+}
 void ReportWindow::SetData()
 {
 	for (auto book : books)
 	{
 		int row_count = ui.Table->rowCount();
 		ui.Table->insertRow(row_count);
-		//ui.Table->item(row_count,)->setTextAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
 		ui.Table->setItem(row_count, 0,new QTableWidgetItem(QString::fromLocal8Bit(book.GetName())));
 		ui.Table->setItem(row_count, 1, new QTableWidgetItem(book.GetISBN()));
 		ui.Table->setItem(row_count, 2, new QTableWidgetItem(QString::fromLocal8Bit(book.GetAuth())));
