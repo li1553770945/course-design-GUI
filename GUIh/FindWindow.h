@@ -1,6 +1,6 @@
 #pragma once
 #include <QtWidgets/QMainWindow>
-#include <ui_FindBook.h>
+#include <ui_FindWindow.h>
 class FindWindow : public QMainWindow
 {
 	Q_OBJECT

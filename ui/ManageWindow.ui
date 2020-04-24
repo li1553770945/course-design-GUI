@@ -495,7 +495,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="lineEdit_9"/>
+           <widget class="QLineEdit" name="LineEditFax"/>
           </item>
          </layout>
         </item>
@@ -558,7 +558,7 @@
   <tabstop>ButtonAdd</tabstop>
   <tabstop>ButtonSave</tabstop>
   <tabstop>ButtonDelete</tabstop>
-  <tabstop>lineEdit_9</tabstop>
+  <tabstop>LineEditFax</tabstop>
   <tabstop>ButtonFaxConfirm</tabstop>
  </tabstops>
  <resources/>

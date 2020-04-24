@@ -1,6 +1,6 @@
 #include "../h/global.h"
 #include <io.h>
-set<BookData> books;
+Books books;
 int my_atoi(const char* const& str)
 {
 	if (strlen(str) == 0)
@@ -63,14 +63,22 @@ void OpenFile()
 	{
 		throw FileStatus::CANNOTOPEN;
 	}//读取文件
+	/*System sys;
+	file.read((char*)&sys, sizeof(sys));
+	if (!file.fail())
+	{
+		Sale::SetFax(sys._fax);
+	}*/
 	while (!file.eof())
 	{
-		BookData temp;
-		file.read((char*)&temp, sizeof(BookData));
+		BookData *temp=new BookData;
+		shared_ptr<BookData> temp_share(temp);
+		file.read((char*)temp, sizeof(BookData));
 		if (file.fail())
 			break;
-		books.insert(temp);
-	}//读入到books链表
+		books.insert(make_pair(string(temp->GetISBN()), temp_share));
+	}//读入到books
+	
 	file.close();
 }
 void CreateFile()
@@ -87,9 +95,12 @@ void SaveFile()
 {
 	fstream file;
 	file.open("book.data", ios::out | ios::binary);
-	for (auto book : books)
+	/*System sys;
+	sys._fax = Sale::GetFax();
+	file.write((char*)&sys, sizeof(sys));*/
+	for (BooksIt it = books.begin();it!=books.end();it++)
 	{
-		file.write((char*)&book, sizeof(book));
+		file.write((char*)&*it->second, sizeof(BookData));
 	}
 	file.close();
 }

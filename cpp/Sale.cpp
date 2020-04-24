@@ -1,4 +1,5 @@
 #include "../h/library.h"
+#include "../h/global.h"
 Sale::Sale()
 {
 	_sum_ = 0;
@@ -8,17 +9,26 @@ double Sale::GetFax()
 {
 	return _fax_;
 }
+void Sale::SetFax(const char* fax_str)
+{
+	double fax = my_atof(fax_str);
+	if (fax<0)
+	{
+		throw "税率只能是不小于零的小数！";
+	}
+	_fax_ = fax;
+}
 void Sale::SetFax(double fax)
 {
 	_fax_ = fax;
 }
 double Sale::_fax_ = 0.06;
-ShoppingItem::ShoppingItem(const BookData *ptr,int num)
+ShoppingItem::ShoppingItem(BookData *ptr,int num)
 {
 	_book_ptr_ = ptr;
 	_num_ = num;
 }
-void Sale::AddItem(const  BookData* & book_ptr, int &num,int &status,int& row)
+void Sale::AddItem(BookData* & book_ptr, int &num,int &status,int& row)
 {
 	int find_row = FindItem(book_ptr);
 	if (find_row == -1)
@@ -53,7 +63,10 @@ void Sale::AddItem(const  BookData* & book_ptr, int &num,int &status,int& row)
 }
 void Sale::Sattle()
 {
-	
+	for (auto item : _cart_)
+	{
+		item._book_ptr_->SetQty(item._book_ptr_->GetQty() - item._num_);
+	}
 	_cart_.clear();
 }
 bool Sale::IsEmpty()

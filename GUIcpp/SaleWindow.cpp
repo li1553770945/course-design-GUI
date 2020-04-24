@@ -22,18 +22,18 @@ SaleWindow::SaleWindow(QWidget* parent)
 }
 void SaleWindow::on_Confirm_clicked()
 {
-	set<BookData>::iterator it;
-	if (!Management::FindISBN(books, it, ui.ISBN->text().toLatin1().data()))
+	BooksIt it;
+	if (!Management::FindISBN(it, ui.ISBN->text().toStdString()))
 	{
 		QMessageBox message_box(QMessageBox::Warning, "提示", "ISBN输入错误，请重新输入!", QMessageBox::Yes);
 		message_box.exec();
 	}
 	else
 	{
-		_sale_.choose_book =&*it;
-		ui.Name->setText(QString::fromLocal8Bit(it->GetName()));
-		ui.Qty->setText(QString::number(it->GetQty()));
-		ui.Retail->setText(QString::number(it->GetRetail(),10,2));
+		_sale_.choose_book =&*(it->second);
+		ui.Name->setText(QString::fromLocal8Bit(_sale_.choose_book->GetName()));
+		ui.Qty->setText(QString::number(_sale_.choose_book->GetQty()));
+		ui.Retail->setText(QString::number(_sale_.choose_book->GetRetail(),10,2));
 		Select(true);
 	}
 }
@@ -91,6 +91,7 @@ void SaleWindow::on_ButtonAddToCart_clicked()
 	{
 		QMessageBox box(QMessageBox::Information, "提示", "数量必须为大于0的整数！");
 		box.exec();
+		return;
 	}
 	int status;
 	int row;
@@ -102,13 +103,14 @@ void SaleWindow::on_ButtonAddToCart_clicked()
 		{
 			ui.TableCart->insertRow(row);
 		}
-		cout << row;
 		ui.TableCart->setItem(row, 0, new QTableWidgetItem(QString::fromLocal8Bit(_sale_.choose_book->GetName())));//添加表格
 		ui.TableCart->setItem(row, 1, new QTableWidgetItem(QString::number(_sale_.choose_book->GetRetail(), 10, 2)));
 		ui.TableCart->setItem(row, 2, new QTableWidgetItem(QString::number(num)));
 		ui.TableCart->setItem(row, 3, new QTableWidgetItem(QString::number(_sale_.choose_book->GetRetail() * num, 10, 2)));
 		ui.Sum->setText(QString::number(_sale_.GetSum(), 10, 2));
 		ui.SumFaxed->setText(QString::number(_sale_.GetSumFaxed() ,10, 2));
+		ui.ISBN->setText("");
+		ui.Num->setText("");
 	}
 	else if (status == Sale::OVERQTY)
 	{

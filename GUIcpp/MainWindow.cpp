@@ -67,6 +67,12 @@ void MainWindow::LoadFile()
 }
 void MainWindow::on_ButtonSale_clicked()
 {
+	if (manage_window != NULL)//为了防止收银的同时进行修改，规定收银和管理窗口智能同时打开一个
+	{
+		QMessageBox box(QMessageBox::Information, "提示", "请先关闭管理窗口！");
+		box.exec();
+		return;
+	}
 	if (sale_window == NULL)//如果为空，说明还没有打开过这个窗口，那么就新建一个并显示
 	{
 		
@@ -84,6 +90,12 @@ void MainWindow::on_ButtonSale_clicked()
 }
 void MainWindow::on_ButtonManage_clicked()
 {
+	if (sale_window != NULL)
+	{
+		QMessageBox box(QMessageBox::Information, "提示", "请先关闭收银窗口！");
+		box.exec();
+		return;
+	}
 	if (manage_window == NULL)
 	{
 

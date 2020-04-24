@@ -1,5 +1,6 @@
 #include "../GUIh/ReportWindow.h"
 #include "../h/global.h"
+#include <QtWidgets\qmessagebox.h>
 ReportWindow::ReportWindow(QWidget* parent) :QMainWindow(parent)
 {
 	ui.setupUi(this);
@@ -73,17 +74,21 @@ void ReportWindow::on_ButtonFlush_clicked()
 }
 void ReportWindow::SetData()
 {
-	for (auto book : books)
+	ui.Table->clearContents();
+	ui.Table->setRowCount(0);
+	int row_count = 0;
+	for (auto book_pair:books)
 	{
-		int row_count = ui.Table->rowCount();
+		BookData* book = &*book_pair.second;
 		ui.Table->insertRow(row_count);
-		ui.Table->setItem(row_count, 0,new QTableWidgetItem(QString::fromLocal8Bit(book.GetName())));
-		ui.Table->setItem(row_count, 1, new QTableWidgetItem(book.GetISBN()));
-		ui.Table->setItem(row_count, 2, new QTableWidgetItem(QString::fromLocal8Bit(book.GetAuth())));
-		ui.Table->setItem(row_count, 3, new QTableWidgetItem(QString::fromLocal8Bit(book.GetPub())));
-		ui.Table->setItem(row_count, 4, new QTableWidgetItem(book.GetDateAdded()));
-		ui.Table->setItem(row_count, 5, new QTableWidgetItem(QString::number(book.GetQty())));
-		ui.Table->setItem(row_count, 6, new QTableWidgetItem(QString::number(book.GetRetail(),10,2)));
-		ui.Table->setItem(row_count, 7, new QTableWidgetItem(QString::number(book.GetWholesale(), 10, 2)));
+		ui.Table->setItem(row_count, 0,new QTableWidgetItem(QString::fromLocal8Bit(book->GetName())));
+		ui.Table->setItem(row_count, 1, new QTableWidgetItem(book->GetISBN()));
+		ui.Table->setItem(row_count, 2, new QTableWidgetItem(QString::fromLocal8Bit(book->GetAuth())));
+		ui.Table->setItem(row_count, 3, new QTableWidgetItem(QString::fromLocal8Bit(book->GetPub())));
+		ui.Table->setItem(row_count, 4, new QTableWidgetItem(book->GetDateAdded()));
+		ui.Table->setItem(row_count, 5, new QTableWidgetItem(QString::number(book->GetQty())));
+		ui.Table->setItem(row_count, 6, new QTableWidgetItem(QString::number(book->GetRetail(),10,2)));
+		ui.Table->setItem(row_count, 7, new QTableWidgetItem(QString::number(book->GetWholesale(), 10, 2)));
+		row_count++;
 	}
 }
