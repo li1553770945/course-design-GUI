@@ -37,12 +37,7 @@ bool Management::Delete(BooksIt& it)
 }
 bool Management::Edit(BooksIt& it, BookData* book_ptr)
 {
-	if (FindISBN(string(book_ptr->GetISBN())))
-		return false;
-	else
-	{
-		shared_ptr<BookData> shared_p(book_ptr);
-		it->second = shared_p;
-		return true;
-	}
+	shared_ptr<BookData> shared_p(book_ptr);
+	it->second = shared_p;
+	return true;
 }

@@ -366,6 +366,12 @@
               <pointsize>12</pointsize>
              </font>
             </property>
+            <property name="whatsThis">
+             <string>ISBN作为唯一id不能修改。</string>
+            </property>
+            <property name="readOnly">
+             <bool>true</bool>
+            </property>
            </widget>
           </item>
           <item row="4" column="0">
