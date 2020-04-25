@@ -63,12 +63,6 @@ void OpenFile()
 	{
 		throw FileStatus::CANNOTOPEN;
 	}//读取文件
-	/*System sys;
-	file.read((char*)&sys, sizeof(sys));
-	if (!file.fail())
-	{
-		Sale::SetFax(sys._fax);
-	}*/
 	while (!file.eof())
 	{
 		BookData *temp=new BookData;
@@ -78,7 +72,14 @@ void OpenFile()
 			break;
 		books.insert(make_pair(string(temp->GetISBN()), temp_share));
 	}//读入到books
-	
+	file.close();
+	file.open("config.data", ios::in);
+	double fax;
+	file >> fax;
+	if (!file.fail())
+	{
+		Sale::SetFax(fax);
+	}
 	file.close();
 }
 void CreateFile()
@@ -95,12 +96,12 @@ void SaveFile()
 {
 	fstream file;
 	file.open("book.data", ios::out | ios::binary);
-	/*System sys;
-	sys._fax = Sale::GetFax();
-	file.write((char*)&sys, sizeof(sys));*/
 	for (BooksIt it = books.begin();it!=books.end();it++)
 	{
 		file.write((char*)&*it->second, sizeof(BookData));
 	}
+	file.close();
+	file.open("config.data", ios::out);
+	file << Sale::GetFax();
 	file.close();
 }
