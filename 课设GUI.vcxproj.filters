@@ -55,7 +55,7 @@
     <QtUic Include="ui\BookInfoWindow.ui">
       <Filter>Form Files</Filter>
     </QtUic>
-    <QtUic Include="FindWindow.ui">
+    <QtUic Include="ui\FindWindow.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>
