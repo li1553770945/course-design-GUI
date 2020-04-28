@@ -1,5 +1,5 @@
 #pragma once
-#include <bits/stdc++.h>
+#include "bits/stdc++.h"
 using namespace std;
 
 class TitleInfo {//书的基本信息，固定
@@ -33,15 +33,49 @@ public:
 	bool operator <(const BookData& rhs)const;
 
 };
-class Sale {
-private:
-	static double _fax_;
+typedef  map< string, shared_ptr<BookData> > Books;
+typedef Books::iterator BooksIt;
+class Sale;
+class ShoppingItem
+{
+	BookData* _book_ptr_;
+	int _num_;
 public:
-	static double GetFax();
-	static void SetFax(double fax);
+	ShoppingItem(BookData* ptr, int num);
+	friend Sale;
 };
+class Sale {
+public:
+	enum AddStatus { //表示添加状态的常数
+	};
+	static constexpr AddStatus SUCCESS = static_cast<AddStatus>(0x01);
+	static constexpr AddStatus EXIST = static_cast<AddStatus>(0x02);
+	static constexpr AddStatus OVERQTY = static_cast<AddStatus>(0x04);
+	Sale();
+	double GetSum();
+	double GetSumFaxed();
+	static double GetFax();
+	static void SetFax(const char * fax_str);
+	static void SetFax(double fax);
+	void Sattle();
+	void AddItem(BookData* &,int& num,int& status,int& row);//既要返回状态，又要返回插入行，无奈，出此对策，传进来状态和行数的引用
+	bool IsEmpty();
+	BookData* choose_book;
+	int FindItem(const BookData*);
+private:
+	vector <ShoppingItem> _cart_;//购物车
+	static double _fax_;
+	double _sum_;
+};
+
 class Management {
 public:
-	static bool FindISBN(set<BookData> const &, set<BookData>::iterator  &,const char* const&);//根据ISBN查找书
-	static bool FindISBN(set<BookData>const&,  const char* const&);//根据ISBN查找书
+	enum class FindWhere { NAME, AUTHOR, PUBLISHER };
+	static bool FindISBN(BooksIt& it, string& isbn);//根据ISBN查找书
+	static bool FindISBN(string &);//根据ISBN查找书
+	static bool Add(BookData*& book_ptr);
+	static bool Delete(BooksIt& it);
+	static bool Edit(BooksIt& it, BookData* book_ptr);
+	static void FindEqual(list <shared_ptr<BookData> >& results,string& content,map <FindWhere,bool> &find_where);
+	static void FindInclude(list <shared_ptr<BookData> > & results,string & content, map <FindWhere, bool>& find_where);
 };

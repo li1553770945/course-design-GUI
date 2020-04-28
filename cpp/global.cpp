@@ -1,4 +1,6 @@
 #include "../h/global.h"
+#include <io.h>
+Books books;
 int my_atoi(const char* const& str)
 {
 	if (strlen(str) == 0)
@@ -18,6 +20,8 @@ int my_atoi(const char* const& str)
 }
 double my_atof(const char* const& str)
 {
+	if (strlen(str) == 0)
+		return -1;
 	bool point = false;
 	int i = 0;
 	if (str[i] == '-')
@@ -46,4 +50,58 @@ double my_atof(const char* const& str)
 		}
 	}
 	return atof(str);
+}
+void OpenFile()
+{
+	fstream  file;
+	if (_access("book.data", 0) == -1)
+	{
+		throw FileStatus::NOTEXIST;
+	}
+	file.open("book.data", ios::binary | ios::in | ios::out);
+	if (!file.is_open())
+	{
+		throw FileStatus::CANNOTOPEN;
+	}//读取文件
+	while (!file.eof())
+	{
+		BookData *temp=new BookData;
+		shared_ptr<BookData> temp_share(temp);
+		file.read((char*)temp, sizeof(BookData));
+		if (file.fail())
+			break;
+		books.insert(make_pair(string(temp->GetISBN()), temp_share));
+	}//读入到books
+	file.close();
+	file.open("config.data", ios::in);
+	double fax;
+	file >> fax;
+	if (!file.fail())
+	{
+		Sale::SetFax(fax);
+	}
+	file.close();
+}
+void CreateFile()
+{
+	fstream  file;
+	file.open("book.data", ios::out);
+	file.close();
+	if (_access("book.data", 0) == -1)
+	{
+		throw FileStatus::CANNOTCREATE;
+	}
+}
+void SaveFile()
+{
+	fstream file;
+	file.open("book.data", ios::out | ios::binary);
+	for (BooksIt it = books.begin();it!=books.end();it++)
+	{
+		file.write((char*)&*it->second, sizeof(BookData));
+	}
+	file.close();
+	file.open("config.data", ios::out);
+	file << Sale::GetFax();
+	file.close();
 }

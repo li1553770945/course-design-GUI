@@ -61,7 +61,7 @@
       <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <OutputFile>$(OutDir)\$(ProjectName).exe</OutputFile>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
@@ -81,6 +81,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <QtUic Include="FindWindow.ui" />
     <QtUic Include="ui\AboutWindow.ui" />
     <QtUic Include="ui\BookInfoWindow.ui" />
     <QtUic Include="ui\MainWindow.ui" />
@@ -100,6 +101,7 @@
     <ClCompile Include="cpp\TitleInfo.cpp" />
     <ClCompile Include="GUIcpp\AboutWindow.cpp" />
     <ClCompile Include="GUIcpp\BookInfoWindow.cpp" />
+    <ClCompile Include="GUIcpp\FindWindow.cpp" />
     <ClCompile Include="GUIcpp\MainWindow.cpp" />
     <ClCompile Include="GUIcpp\ManageWindow.cpp" />
     <ClCompile Include="GUIcpp\ReportWindow.cpp" />
@@ -117,6 +119,7 @@
   <ItemGroup>
     <QtMoc Include="GUIh\AboutWindow.h" />
     <QtMoc Include="GUIh\BookInfoWindow.h" />
+    <QtMoc Include="GUIh\FindWindow.h" />
     <ClInclude Include="h\global.h" />
     <ClInclude Include="h\library.h" />
   </ItemGroup>

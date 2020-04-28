@@ -11,6 +11,7 @@ public:
 private:
 	Ui::ReportWindowClass ui;
 	void closeEvent(QCloseEvent* event);
+	void SetData();
 private slots:
 	void on_CheckBoxName_clicked();
 	void on_CheckBoxISBN_clicked();
@@ -20,7 +21,7 @@ private slots:
 	void on_CheckBoxQty_clicked();
 	void on_CheckBoxRetail_clicked();
 	void on_CheckBoxWholesale_clicked();
-	void SetData();
+	void on_ButtonFlush_clicked();
 signals:
 	void Close(std::string);
 };

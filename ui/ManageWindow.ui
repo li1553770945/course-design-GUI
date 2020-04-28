@@ -366,6 +366,12 @@
               <pointsize>12</pointsize>
              </font>
             </property>
+            <property name="whatsThis">
+             <string>ISBN作为唯一id不能修改。</string>
+            </property>
+            <property name="readOnly">
+             <bool>true</bool>
+            </property>
            </widget>
           </item>
           <item row="4" column="0">
@@ -495,7 +501,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="lineEdit_9"/>
+           <widget class="QLineEdit" name="LineEditFax"/>
           </item>
          </layout>
         </item>
@@ -558,7 +564,7 @@
   <tabstop>ButtonAdd</tabstop>
   <tabstop>ButtonSave</tabstop>
   <tabstop>ButtonDelete</tabstop>
-  <tabstop>lineEdit_9</tabstop>
+  <tabstop>LineEditFax</tabstop>
   <tabstop>ButtonFaxConfirm</tabstop>
  </tabstops>
  <resources/>
