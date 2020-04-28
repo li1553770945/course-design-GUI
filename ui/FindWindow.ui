@@ -30,7 +30,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QRadioButton" name="RadioContain">
+         <widget class="QRadioButton" name="RadioInclude">
           <property name="text">
            <string>包含</string>
           </property>
@@ -39,7 +39,7 @@
        </layout>
       </item>
       <item row="0" column="0">
-       <layout class="QHBoxLayout" name="horizontalLayout">
+       <layout class="QHBoxLayout" name="CheckBoxs">
         <item>
          <widget class="QLabel" name="label">
           <property name="text">
@@ -74,7 +74,11 @@
        </layout>
       </item>
       <item row="2" column="0">
-       <widget class="QLineEdit" name="lineEdit"/>
+       <widget class="QLineEdit" name="LineEditContent">
+        <property name="maxLength">
+         <number>10</number>
+        </property>
+       </widget>
       </item>
       <item row="2" column="1">
        <widget class="QPushButton" name="ButtonFind">
@@ -99,7 +103,10 @@
      </spacer>
     </item>
     <item row="1" column="0" colspan="2">
-     <widget class="QTableWidget" name="tableWidget">
+     <widget class="QTableWidget" name="Table">
+      <property name="editTriggers">
+       <set>QAbstractItemView::NoEditTriggers</set>
+      </property>
       <column>
        <property name="text">
         <string>书名</string>
@@ -118,6 +125,11 @@
       <column>
        <property name="text">
         <string>出版社</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>库存</string>
        </property>
       </column>
      </widget>
