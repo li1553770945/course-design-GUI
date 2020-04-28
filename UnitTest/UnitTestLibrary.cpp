@@ -110,5 +110,20 @@ namespace UnitTestLibrary
 			Assert::IsTrue(Management::FindISBN(it, string(isbn)));
 			Management::Delete(it);
 		}
+		
+	};
+	TEST_CLASS(ManagementFindEqual)
+	{
+		TEST_METHOD(Name)
+		{
+			BookData* book = new BookData;
+			book->SetName("面向");
+			Management::Add(book);
+			map <Management::FindWhere, bool> find_where;
+			find_where[Management::FindWhere::NAME] = true;
+			list <shared_ptr <BookData> > results;
+			Management::FindEqual(results, string("面向"), find_where);
+			Assert::IsFalse(results.empty());
+		}
 	};
 }

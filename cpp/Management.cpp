@@ -41,3 +41,49 @@ bool Management::Edit(BooksIt& it, BookData* book_ptr)
 	it->second = shared_p;
 	return true;
 }
+void Management::FindEqual(list <shared_ptr<BookData> >& results,string& content, map <FindWhere, bool>& find_where)
+{
+	results.clear();
+	for (auto book : books)
+	{
+		if (find_where[FindWhere::NAME]==true&&!strcmp(book.second->GetName(),content.data()))
+		{
+			
+			results.push_back(book.second);
+			continue;
+		}
+		if (find_where[FindWhere::AUTHOR] == true && !strcmp(book.second->GetAuth(), content.data()))
+		{
+			results.push_back(book.second);
+			continue;
+		}
+		if (find_where[FindWhere::PUBLISHER] == true && !strcmp(book.second->GetPub(), content.data()))
+		{
+			results.push_back(book.second);
+			continue;
+		}
+	}
+}
+void Management::FindInclude(list <shared_ptr<BookData> >& results,string & content, map <FindWhere, bool>& find_where)
+{
+	results.clear();
+	for (auto book : books)
+	{
+		if (find_where[FindWhere::NAME] == true &&string(book.second->GetName()).find(content)!=string::npos)
+		{
+			results.push_back(book.second);
+			continue;
+		}
+		if (find_where[FindWhere::AUTHOR] == true && string(book.second->GetAuth()).find(content) != string::npos)
+		{
+			results.push_back(book.second);
+			continue;
+		}
+		if (find_where[FindWhere::PUBLISHER] == true && string(book.second->GetPub()).find(content) != string::npos)
+		{
+			results.push_back(book.second);
+			continue;
+		}
+	}
+}
+

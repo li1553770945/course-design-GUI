@@ -58,7 +58,7 @@ public:
 	static void SetFax(const char * fax_str);
 	static void SetFax(double fax);
 	void Sattle();
-	void AddItem(BookData* &,int& num,int& status,int& row);//既要返回状态，又要返回插入行，是在无奈，出此对策，传进来状态和行数的引用
+	void AddItem(BookData* &,int& num,int& status,int& row);//既要返回状态，又要返回插入行，无奈，出此对策，传进来状态和行数的引用
 	bool IsEmpty();
 	BookData* choose_book;
 	int FindItem(const BookData*);
@@ -70,9 +70,12 @@ private:
 
 class Management {
 public:
+	enum class FindWhere { NAME, AUTHOR, PUBLISHER };
 	static bool FindISBN(BooksIt& it, string& isbn);//根据ISBN查找书
 	static bool FindISBN(string &);//根据ISBN查找书
 	static bool Add(BookData*& book_ptr);
 	static bool Delete(BooksIt& it);
 	static bool Edit(BooksIt& it, BookData* book_ptr);
+	static void FindEqual(list <shared_ptr<BookData> >& results,string& content,map <FindWhere,bool> &find_where);
+	static void FindInclude(list <shared_ptr<BookData> > & results,string & content, map <FindWhere, bool>& find_where);
 };
