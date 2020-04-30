@@ -14,6 +14,7 @@ private:
 	list <shared_ptr<BookData> > _find_results_;
 	Ui::FindWindowClass ui;
 	string _find_content_;
+	clock_t _start_;
 private slots:
 	void closeEvent(QCloseEvent* event);
 	void on_ButtonFind_clicked();

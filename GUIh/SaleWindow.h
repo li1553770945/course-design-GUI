@@ -38,5 +38,7 @@ private slots:
 	void on_ButtonSattle_clicked();
 	void on_ButtonFind_clicked();
 	void SonClose(std::string);
+	void on_ButtonClear_clicked();
+	void on_TableCart_cellChanged(int, int);
 };
 

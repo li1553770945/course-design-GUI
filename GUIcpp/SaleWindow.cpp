@@ -19,6 +19,8 @@ SaleWindow::SaleWindow(QWidget* parent)
 	select = false;
 	find_window = NULL;
 	report_window = NULL;
+	ui.TableCart->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+	ui.TableCart->horizontalHeader()->setSectionResizeMode(0, QHeaderView::ResizeToContents);
 }
 void SaleWindow::on_Confirm_clicked()
 {
@@ -93,10 +95,11 @@ void SaleWindow::on_ButtonAddToCart_clicked()
 		box.exec();
 		return;
 	}
+	
+	ui.TableCart->disconnect(SIGNAL(cellChanged(int,int)));
 	int status;
 	int row;
 	_sale_.AddItem(_sale_.choose_book, num, status, row);
-	
 	if (status== Sale::SUCCESS||status==(Sale::EXIST|Sale::SUCCESS))
 	{
 		if (row >= ui.TableCart->rowCount())
@@ -107,6 +110,13 @@ void SaleWindow::on_ButtonAddToCart_clicked()
 		ui.TableCart->setItem(row, 1, new QTableWidgetItem(QString::number(_sale_.choose_book->GetRetail(), 10, 2)));
 		ui.TableCart->setItem(row, 2, new QTableWidgetItem(QString::number(num)));
 		ui.TableCart->setItem(row, 3, new QTableWidgetItem(QString::number(_sale_.choose_book->GetRetail() * num, 10, 2)));
+		for (int j = 0; j < 4; j++)
+		{
+			ui.TableCart->item(row, j)->setTextAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+		}
+		ui.TableCart->item(row, 0)->setFlags(Qt::NoItemFlags);
+		ui.TableCart->item(row, 1)->setFlags(Qt::NoItemFlags);
+		ui.TableCart->item(row, 3)->setFlags(Qt::NoItemFlags);
 		ui.Sum->setText(QString::number(_sale_.GetSum(), 10, 2));
 		ui.SumFaxed->setText(QString::number(_sale_.GetSumFaxed() ,10, 2));
 		ui.ISBN->setText("");
@@ -124,6 +134,7 @@ void SaleWindow::on_ButtonAddToCart_clicked()
 		QMessageBox box(QMessageBox::Information, "提示", message);
 		box.exec();
 	}
+	connect(ui.TableCart, SIGNAL(cellChanged(int, int)), this, SLOT(on_TableCart_cellChanged(int,int)));
 }
 void SaleWindow::on_Num_returnPressed()
 {
@@ -191,5 +202,23 @@ void SaleWindow::SonClose(std::string name)
 	if (name == "find")
 	{
 		find_window = NULL;
+	}
+}
+void SaleWindow::on_TableCart_cellChanged(int row, int column)
+{
+	QMessageBox box(QMessageBox::Information, "提示", "您的购买量已经超过库存！");
+	box.exec();//TODO:不能区分用户编辑还是初始化数据
+}
+void SaleWindow::on_ButtonClear_clicked()
+{
+	QMessageBox box(QMessageBox::Warning, "警告", "您确定要放弃支付并清空购物车么？该操作不可恢复！",QMessageBox::Yes|QMessageBox::No);
+	switch (box.exec())
+	{
+	case QMessageBox::Yes:
+		ui.TableCart->clearContents();
+		ui.TableCart->setRowCount(0);
+		ui.Sum->setText("");
+		ui.SumFaxed->setText("");
+		_sale_.Clear();
 	}
 }

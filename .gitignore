@@ -340,3 +340,4 @@ ASALocalRun/
 healthchecksdb
 book.data
 config.data
+release/

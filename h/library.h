@@ -62,6 +62,7 @@ public:
 	bool IsEmpty();
 	BookData* choose_book;
 	int FindItem(const BookData*);
+	void Clear();
 private:
 	vector <ShoppingItem> _cart_;//¹ºÎï³µ
 	static double _fax_;

@@ -90,3 +90,8 @@ double Sale::GetSumFaxed()
 {
 	return _sum_*(1+_fax_);
 }
+void Sale::Clear()
+{
+	_cart_.clear();
+	_sum_ = 0;
+}

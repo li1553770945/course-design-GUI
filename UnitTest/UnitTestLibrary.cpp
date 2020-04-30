@@ -77,7 +77,9 @@ namespace UnitTestLibrary
 		{
 			BookData* book = new BookData;
 			Management::Add(book);
-			Assert::AreEqual(1, (int)books.size());
+		}
+		TEST_METHOD(AddMuch)
+		{
 		}
 		TEST_METHOD(FindISBNNoIterator)
 		{

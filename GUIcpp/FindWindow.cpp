@@ -6,6 +6,7 @@ FindWindow::FindWindow(QWidget* parent) :QMainWindow(parent)
 {
 	ui.setupUi(this);
 	setAttribute(Qt::WA_DeleteOnClose);
+	
 }
 void FindWindow::closeEvent(QCloseEvent* event)
 {
@@ -13,12 +14,13 @@ void FindWindow::closeEvent(QCloseEvent* event)
 }
 void FindWindow::on_ButtonFind_clicked()
 {
-	if (!ui.CheckBoxName->isChecked()&&!ui.CheckBoxAuthor->isChecked()&& ui.CheckBoxPublisher->isChecked())
+	if (!ui.CheckBoxName->isChecked()&&!ui.CheckBoxAuthor->isChecked()&& !ui.CheckBoxPublisher->isChecked())
 	{
 		QMessageBox box(QMessageBox::Information, "提示", "至少选择一个查找项！");
 		box.exec();
 		return;
 	}
+	_start_ = clock();
 	map <Management::FindWhere, bool >find_where;
 	if (ui.CheckBoxName->isChecked())
 		find_where[Management::FindWhere::NAME] = true;
@@ -40,12 +42,12 @@ void FindWindow::on_ButtonFind_clicked()
 }
 void  FindWindow::SetTable()
 {
+	ui.Table->horizontalHeader()->setSectionResizeMode(0, QHeaderView::Fixed);
 	ui.Table->clearContents();
-	ui.Table->setRowCount(0);
+	ui.Table->setRowCount(_find_results_.size());
 	int row = 0;
 	for (auto book : _find_results_)
 	{
-		ui.Table->insertRow(row);
 		ui.Table->setItem(row, 0, new QTableWidgetItem(QString::fromLocal8Bit(book->GetName())));//添加表格
 		ui.Table->setItem(row, 1, new QTableWidgetItem(QString(book->GetISBN())));
 		ui.Table->setItem(row, 2, new QTableWidgetItem(QString::fromLocal8Bit(book->GetAuth())));
@@ -53,7 +55,17 @@ void  FindWindow::SetTable()
 		ui.Table->setItem(row, 4, new QTableWidgetItem(QString::number(book->GetQty(),10)));
 		row++;
 	}
-	ui.statusbar->showMessage(QString("搜索“")+QString::fromLocal8Bit(_find_content_.data())+QString("”共找到")+QString::number(_find_results_.size())+QString("个结果"));
+	for (int i = 0; i < row; i++)
+	{
+		for (int j = 0; j < 5; j++)
+		{
+			ui.Table->item(i, j)->setTextAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+		}
+	}
+	ui.Table->horizontalHeader()->setSectionResizeMode(0, QHeaderView::ResizeToContents);
+	clock_t end = clock();		//程序结束用时
+	double endtime = (double)(end - _start_) / CLOCKS_PER_SEC;
+	ui.statusbar->showMessage(QString("搜索“")+QString::fromLocal8Bit(_find_content_.data())+QString("”共找到")+QString::number(_find_results_.size())+QString("个结果，用时")+QString::number(endtime,10,3)+QString("秒"));
 }
 void FindWindow::on_LineEditContent_returnPressed()
 {
