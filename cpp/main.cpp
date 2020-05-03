@@ -14,7 +14,7 @@ int main(int argc, char *argv[])
 	a.installTranslator(&translator);
 	w.show();
 	//用于增加测试书，慎重使用！
-	/*for (int i = 1; i <= 10000; i++)
+	/*for (int i = 1; i <= 1000000; i++)
 	{
 		BookData* book = new BookData;
 		char s[10];

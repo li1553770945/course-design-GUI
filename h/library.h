@@ -1,5 +1,5 @@
 #pragma once
-#include "bits/stdc++.h"
+#include <bits/stdc++.h>
 using namespace std;
 
 class TitleInfo {//书的基本信息，固定
@@ -79,4 +79,10 @@ public:
 	static bool Edit(BooksIt& it, BookData* book_ptr);
 	static void FindEqual(list <shared_ptr<BookData> >& results,string& content,map <FindWhere,bool> &find_where);
 	static void FindInclude(list <shared_ptr<BookData> > & results,string & content, map <FindWhere, bool>& find_where);
+};
+class Report {
+public:
+	static void SetBookVec();
+	static void Sort(const char * key);
+	static vector <shared_ptr<BookData>> _book_vec;
 };
