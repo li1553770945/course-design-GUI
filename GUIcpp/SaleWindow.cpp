@@ -155,6 +155,11 @@ void SaleWindow::on_ButtonSattle_clicked()//结算按钮
 		ui.TableCart->setRowCount(0);
 		ui.Sum->setText("");
 		ui.SumFaxed->setText("");
+		ui.Name->setText("");
+		ui.Qty->setText("");
+		ui.Retail->setText("");
+		_sale_.choose_book = NULL;
+		Select(false);
 		QMessageBox box(QMessageBox::Information, "提示", "交易已成功！");
 		box.exec();
 	}
@@ -197,10 +202,12 @@ void SaleWindow::SonClose(std::string name)
 {
 	if (name == "report")
 	{
+		delete report_window;
 		report_window = NULL;
 	}
 	if (name == "find")
 	{
+		delete find_window;
 		find_window = NULL;
 	}
 }
@@ -215,10 +222,14 @@ void SaleWindow::on_ButtonClear_clicked()
 	switch (box.exec())
 	{
 	case QMessageBox::Yes:
+		_sale_.choose_book = NULL;
 		ui.TableCart->clearContents();
 		ui.TableCart->setRowCount(0);
 		ui.Sum->setText("");
 		ui.SumFaxed->setText("");
 		_sale_.Clear();
+		ui.Name->setText("");
+		ui.Qty->setText("");
+		Select(false);
 	}
 }
