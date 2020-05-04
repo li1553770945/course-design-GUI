@@ -95,9 +95,6 @@
     <ClCompile Include="GUIcpp\BookInfoWindow.cpp">
       <Filter>Source Files\GUI</Filter>
     </ClCompile>
-    <ClCompile Include="GUIcpp\MainWindow.cpp">
-      <Filter>Source Files\GUI</Filter>
-    </ClCompile>
     <ClCompile Include="GUIcpp\ManageWindow.cpp">
       <Filter>Source Files\GUI</Filter>
     </ClCompile>
@@ -120,6 +117,12 @@
       <Filter>Source Files\Library</Filter>
     </ClCompile>
     <ClCompile Include="GUIcpp\FindWindow.cpp">
+      <Filter>Source Files\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="cpp\Report.cpp">
+      <Filter>Source Files\Library</Filter>
+    </ClCompile>
+    <ClCompile Include="GUIcpp\MainWindow.cpp">
       <Filter>Source Files\GUI</Filter>
     </ClCompile>
   </ItemGroup>

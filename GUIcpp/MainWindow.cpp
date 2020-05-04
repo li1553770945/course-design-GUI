@@ -9,6 +9,8 @@
 #include <QCloseEvent> 
 #include <qdebug.h>
 #include <io.h>
+#include <QProgressDialog>
+#include <qthread.h>
 # pragma execution_character_set("utf-8")
 MainWindow::MainWindow(QWidget *parent)
 	: QMainWindow(parent)
@@ -20,11 +22,31 @@ MainWindow::MainWindow(QWidget *parent)
 	ui.setupUi(this);
 	setAttribute(Qt::WA_DeleteOnClose);
 }
-
+void  OpenFileThread::run()
+{
+	OpenFile();
+	emit ProcessEnd();
+}
+void SaveFileThread::run()
+{
+	SaveFile();
+	emit ProcessEnd();
+}
+void MainWindow::CloseProcess()
+{
+	_dialog_->close();
+	delete _dialog_;
+}
 void MainWindow::LoadFile()
 {
+	_dialog_=new QProgressDialog("正在读取文件...请勿关闭程序或您的计算机", 0, 0, 0);
+	_dialog_->setWindowTitle("读取文件");
 	try {
-		OpenFile();
+		OpenFileThread thread;
+		connect(&thread, SIGNAL(ProcessEnd()), this, SLOT(CloseProcess()));
+		thread.start();
+		_dialog_->exec();
+		thread.wait();
 	}
 	catch (FileStatus err)
 	{
@@ -146,7 +168,13 @@ void MainWindow::on_ButtonExit_clicked()
 			sale_window->close();
 			delete sale_window;
 		}
-		SaveFile();
+		_dialog_ = new QProgressDialog("正在保存文件...请勿关闭程序或您的计算机", 0, 0, 0);
+		_dialog_->setWindowTitle("保存文件");
+		SaveFileThread thread;
+		connect(&thread, SIGNAL(ProcessEnd()), this, SLOT(CloseProcess()));
+		thread.start();
+		_dialog_->exec();
+		thread.wait();
 		exit(0);
 	}
 	default:
@@ -179,3 +207,4 @@ void MainWindow::on_About_triggered()
 	AboutWindow* about_window = new AboutWindow;
 	about_window->exec();
 }
+
