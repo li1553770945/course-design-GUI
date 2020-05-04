@@ -142,26 +142,22 @@ void MainWindow::on_ButtonReport_clicked()
 }
 void MainWindow::on_ButtonExit_clicked()
 {
-	QMessageBox messageBox(QMessageBox::Warning,"警告", "您确定要退出吗?这将关闭所有当前打开的窗口！",QMessageBox::Yes | QMessageBox::No, NULL); 
+	this->close();
+}
+void MainWindow::closeEvent(QCloseEvent* event)
+{
+	if (manage_window != NULL || sale_window != NULL || report_window != NULL)
+	{
+		QMessageBox box(QMessageBox::Warning, "错误", "请先关闭已打开的子窗口！");
+		box.exec();
+		event->ignore();
+		return;
+	}
+	QMessageBox messageBox(QMessageBox::Warning, "警告", "您确定要退出吗?", QMessageBox::Yes | QMessageBox::No, NULL);
 	switch (messageBox.exec())
 	{
 	case QMessageBox::Yes:
 	{
-		if (manage_window)
-		{
-			manage_window->close();
-			delete manage_window;
-		}
-		if (report_window)
-		{
-			report_window->close();
-			delete report_window;
-		}
-		if (sale_window)
-		{
-			sale_window->close();
-			delete sale_window;
-		}
 		_dialog_ = new QProgressDialog("正在保存文件...请勿关闭程序或您的计算机", 0, 0, 0);
 		_dialog_->setWindowTitle("保存文件");
 		SaveFileThread thread;
@@ -172,14 +168,9 @@ void MainWindow::on_ButtonExit_clicked()
 		exit(0);
 	}
 	default:
-		return;
+		event->ignore();
 	}
-}
-void MainWindow::closeEvent(QCloseEvent* event)
-{
 	
-	on_ButtonExit_clicked();
-	event->ignore();
 }
 void MainWindow::CloseSon(std::string name)
 {
