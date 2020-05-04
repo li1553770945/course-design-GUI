@@ -21,6 +21,7 @@ public slots:
 	void CloseSon(std::string);//控制子窗口指针，关闭时将指针变为NULL
 	void on_About_triggered();
 	void CloseProcess();
+	void HandleResult(bool);
 
 private:
 	QProgressDialog* _dialog_;
@@ -39,6 +40,7 @@ protected:
 	void run();
 signals:
 	void ProcessEnd();
+	void OpenResult(bool);
 };
 
 class SaveFileThread : public QThread
