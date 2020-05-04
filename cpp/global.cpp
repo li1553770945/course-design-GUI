@@ -51,17 +51,17 @@ double my_atof(const char* const& str)
 	}
 	return atof(str);
 }
-void OpenFile()
+bool AccessFile()
+{
+	return !(_access("book.data", 0) == -1);
+}
+bool OpenFile()
 {
 	fstream  file;
-	if (_access("book.data", 0) == -1)
-	{
-		throw FileStatus::NOTEXIST;
-	}
 	file.open("book.data", ios::binary | ios::in | ios::out);
 	if (!file.is_open())
 	{
-		throw FileStatus::CANNOTOPEN;
+		return false;
 	}//¶ÁÈ¡ÎÄ¼þ
 	while (!file.eof())
 	{
@@ -81,16 +81,18 @@ void OpenFile()
 		Sale::SetFax(fax);
 	}
 	file.close();
+	return true;
 }
-void CreateFile()
+bool CreateFile()
 {
 	fstream  file;
 	file.open("book.data", ios::out);
 	file.close();
 	if (_access("book.data", 0) == -1)
 	{
-		throw FileStatus::CANNOTCREATE;
+		return false;
 	}
+	return true;
 }
 void SaveFile()
 {

@@ -24,7 +24,7 @@ MainWindow::MainWindow(QWidget *parent)
 }
 void  OpenFileThread::run()
 {
-	OpenFile();
+	emit OpenResult(OpenFile());
 	emit ProcessEnd();
 }
 void SaveFileThread::run()
@@ -37,53 +37,47 @@ void MainWindow::CloseProcess()
 	_dialog_->close();
 	delete _dialog_;
 }
+void MainWindow::HandleResult(bool result)
+{
+	if (!result)
+	{
+		QMessageBox box(QMessageBox::Critical, "错误", "无法打开书库文件！");
+		box.exec();
+		exit(EXIT_FAILURE);
+	}
+}
 void MainWindow::LoadFile()
 {
-	_dialog_=new QProgressDialog("正在读取文件...请勿关闭程序或您的计算机", 0, 0, 0);
-	_dialog_->setWindowTitle("读取文件");
-	try {
+	if(AccessFile())
+	{ 
+		_dialog_ = new QProgressDialog("正在读取文件...请勿关闭程序或您的计算机", 0, 0, 0);
+		_dialog_->setWindowTitle("读取文件");
 		OpenFileThread thread;
 		connect(&thread, SIGNAL(ProcessEnd()), this, SLOT(CloseProcess()));
+		connect(&thread, SIGNAL(OpenResult(bool)), this, SLOT(HandleResult(bool)));
 		thread.start();
 		_dialog_->exec();
 		thread.wait();
 	}
-	catch (FileStatus err)
+	else
 	{
-		if(err==FileStatus::CANNOTOPEN)//无法打开文件
+		QMessageBox box(QMessageBox::Warning, "警告", "书库文件不存在，将尝试创建");
+		box.exec();
+		//尝试创建
+		if (CreateFile())
 		{
-			QMessageBox box(QMessageBox::Critical, "错误", "无法打开文件！");
-			box.exec();
-			exit(EXIT_FAILURE);
-		}
-		if (err == FileStatus::NOTEXIST)//文件不存在，就先尝试创建
-		{
-			QMessageBox box(QMessageBox::Warning, "警告", "书库文件不存在，将尝试创建");
-			box.exec();
-			try//尝试创建
+			if (!OpenFile())
 			{
-				CreateFile();
-			}
-			catch (FileStatus error)
-			{
-				if (error == FileStatus::CANNOTCREATE)//创建失败
-				{
-					QMessageBox box(QMessageBox::Critical, "错误", "无法创建书库文件！");
-					box.exec();
-					exit(EXIT_FAILURE);
-				}
-			}
-			try//创建成功，尝试打开
-			{
-				OpenFile();
-			}
-			catch (FileStatus error)
-			{
-				QMessageBox box(QMessageBox::Critical, "错误", "无法打开文件！");
+				QMessageBox box(QMessageBox::Critical, "错误", "创建已成功，但无法打开文件！");
 				box.exec();
 				exit(EXIT_FAILURE);
 			}
-			
+		}
+		else
+		{
+			QMessageBox box(QMessageBox::Critical, "错误", "无法创建书库文件！");
+			box.exec();
+			exit(EXIT_FAILURE);
 		}
 	}
 }
@@ -148,26 +142,22 @@ void MainWindow::on_ButtonReport_clicked()
 }
 void MainWindow::on_ButtonExit_clicked()
 {
-	QMessageBox messageBox(QMessageBox::Warning,"警告", "您确定要退出吗?这将关闭所有当前打开的窗口！",QMessageBox::Yes | QMessageBox::No, NULL); 
+	this->close();
+}
+void MainWindow::closeEvent(QCloseEvent* event)
+{
+	if (manage_window != NULL || sale_window != NULL || report_window != NULL)
+	{
+		QMessageBox box(QMessageBox::Warning, "错误", "请先关闭已打开的子窗口！");
+		box.exec();
+		event->ignore();
+		return;
+	}
+	QMessageBox messageBox(QMessageBox::Warning, "警告", "您确定要退出吗?", QMessageBox::Yes | QMessageBox::No, NULL);
 	switch (messageBox.exec())
 	{
 	case QMessageBox::Yes:
 	{
-		if (manage_window)
-		{
-			manage_window->close();
-			delete manage_window;
-		}
-		if (report_window)
-		{
-			report_window->close();
-			delete report_window;
-		}
-		if (sale_window)
-		{
-			sale_window->close();
-			delete sale_window;
-		}
 		_dialog_ = new QProgressDialog("正在保存文件...请勿关闭程序或您的计算机", 0, 0, 0);
 		_dialog_->setWindowTitle("保存文件");
 		SaveFileThread thread;
@@ -178,14 +168,9 @@ void MainWindow::on_ButtonExit_clicked()
 		exit(0);
 	}
 	default:
-		return;
+		event->ignore();
 	}
-}
-void MainWindow::closeEvent(QCloseEvent* event)
-{
 	
-	on_ButtonExit_clicked();
-	event->ignore();
 }
 void MainWindow::CloseSon(std::string name)
 {
