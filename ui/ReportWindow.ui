@@ -21,114 +21,203 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
-    <item row="0" column="0">
-     <widget class="QLabel" name="label">
-      <property name="text">
-       <string>选择要显示的列：</string>
-      </property>
-     </widget>
+    <item row="0" column="0" colspan="2">
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QLabel" name="label">
+        <property name="text">
+         <string>选择要显示的列：</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="CheckBoxName">
+        <property name="text">
+         <string>书名</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="CheckBoxISBN">
+        <property name="text">
+         <string>ISBN</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="CheckBoxAuthor">
+        <property name="text">
+         <string>作者</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="CheckBoxPublisher">
+        <property name="text">
+         <string>出版社</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="CheckBoxDateAdded">
+        <property name="text">
+         <string>进货日期</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="CheckBoxQty">
+        <property name="text">
+         <string>库存</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="CheckBoxWholesale">
+        <property name="text">
+         <string>批发价</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="CheckBoxRetail">
+        <property name="text">
+         <string>零售价</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="ButtonFlush">
+        <property name="text">
+         <string>刷新</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </item>
-    <item row="0" column="1">
-     <widget class="QCheckBox" name="CheckBoxName">
-      <property name="text">
-       <string>书名</string>
-      </property>
-      <property name="checked">
-       <bool>true</bool>
-      </property>
-     </widget>
+    <item row="1" column="0" colspan="2">
+     <layout class="QHBoxLayout" name="SortControl">
+      <item>
+       <widget class="QLabel" name="label_3">
+        <property name="minimumSize">
+         <size>
+          <width>130</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>选择排序关键字：</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QRadioButton" name="RadioName">
+        <property name="text">
+         <string>书名</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QRadioButton" name="RadioDateAdded">
+        <property name="minimumSize">
+         <size>
+          <width>90</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>进货日期</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QRadioButton" name="RadioQty">
+        <property name="text">
+         <string>库存量</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QRadioButton" name="RadioRetail">
+        <property name="text">
+         <string>零售价</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QRadioButton" name="RadioWholesale">
+        <property name="text">
+         <string>批发价</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_4">
+        <property name="text">
+         <string>排序方式：</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QRadioButton" name="RadioPositive">
+        <property name="text">
+         <string>A→Z</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+        <attribute name="buttonGroup">
+         <string notr="true">buttonGroup</string>
+        </attribute>
+       </widget>
+      </item>
+      <item>
+       <widget class="QRadioButton" name="RadioBackward">
+        <property name="text">
+         <string>Z→A</string>
+        </property>
+        <attribute name="buttonGroup">
+         <string notr="true">buttonGroup</string>
+        </attribute>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="ButtonSortConfirm">
+        <property name="text">
+         <string>确定</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </item>
-    <item row="0" column="2">
-     <widget class="QCheckBox" name="CheckBoxISBN">
-      <property name="text">
-       <string>ISBN</string>
-      </property>
-      <property name="checked">
-       <bool>true</bool>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="3">
-     <widget class="QCheckBox" name="CheckBoxAuthor">
-      <property name="text">
-       <string>作者</string>
-      </property>
-      <property name="checked">
-       <bool>true</bool>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="4">
-     <widget class="QCheckBox" name="CheckBoxPublisher">
-      <property name="text">
-       <string>出版社</string>
-      </property>
-      <property name="checked">
-       <bool>true</bool>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="5">
-     <widget class="QCheckBox" name="CheckBoxDateAdded">
-      <property name="text">
-       <string>进货日期</string>
-      </property>
-      <property name="checked">
-       <bool>true</bool>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="6">
-     <widget class="QCheckBox" name="CheckBoxQty">
-      <property name="text">
-       <string>库存</string>
-      </property>
-      <property name="checked">
-       <bool>true</bool>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="7">
-     <widget class="QCheckBox" name="CheckBoxRetail">
-      <property name="text">
-       <string>零售价</string>
-      </property>
-      <property name="checked">
-       <bool>true</bool>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="8">
-     <widget class="QCheckBox" name="CheckBoxWholesale">
-      <property name="text">
-       <string>批发价</string>
-      </property>
-      <property name="checked">
-       <bool>true</bool>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="9" colspan="2">
-     <spacer name="horizontalSpacer">
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-      <property name="sizeHint" stdset="0">
-       <size>
-        <width>309</width>
-        <height>20</height>
-       </size>
-      </property>
-     </spacer>
-    </item>
-    <item row="0" column="11">
-     <widget class="QPushButton" name="ButtonFlush">
-      <property name="text">
-       <string>刷新</string>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="0" colspan="12">
+    <item row="2" column="0" colspan="3">
      <widget class="QTableWidget" name="Table">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
@@ -235,7 +324,7 @@
       </column>
      </widget>
     </item>
-    <item row="2" column="0" colspan="10">
+    <item row="3" column="0">
      <spacer name="horizontalSpacer_2">
       <property name="orientation">
        <enum>Qt::Horizontal</enum>
@@ -248,8 +337,8 @@
       </property>
      </spacer>
     </item>
-    <item row="2" column="10" colspan="2">
-     <layout class="QHBoxLayout" name="horizontalLayout">
+    <item row="3" column="1" colspan="2">
+     <layout class="QHBoxLayout" name="PageControl">
       <item>
        <widget class="QLabel" name="label_2">
         <property name="text">
@@ -317,11 +406,6 @@
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <tabstops>
-  <tabstop>CheckBoxName</tabstop>
-  <tabstop>CheckBoxISBN</tabstop>
-  <tabstop>CheckBoxAuthor</tabstop>
-  <tabstop>CheckBoxPublisher</tabstop>
-  <tabstop>CheckBoxDateAdded</tabstop>
   <tabstop>CheckBoxQty</tabstop>
   <tabstop>CheckBoxRetail</tabstop>
   <tabstop>CheckBoxWholesale</tabstop>
@@ -329,4 +413,7 @@
  </tabstops>
  <resources/>
  <connections/>
+ <buttongroups>
+  <buttongroup name="buttonGroup"/>
+ </buttongroups>
 </ui>

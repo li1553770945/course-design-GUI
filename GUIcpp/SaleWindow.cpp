@@ -202,19 +202,17 @@ void SaleWindow::SonClose(std::string name)
 {
 	if (name == "report")
 	{
-		delete report_window;
 		report_window = NULL;
 	}
 	if (name == "find")
 	{
-		delete find_window;
 		find_window = NULL;
 	}
 }
 void SaleWindow::on_TableCart_cellChanged(int row, int column)
 {
 	QMessageBox box(QMessageBox::Information, "提示", "您的购买量已经超过库存！");
-	box.exec();//TODO:不能区分用户编辑还是初始化数据
+	box.exec();
 }
 void SaleWindow::on_ButtonClear_clicked()
 {

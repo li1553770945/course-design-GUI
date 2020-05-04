@@ -115,6 +115,7 @@ void ReportWindow::Initialize()
 	ui.LineEditPage->setText(QString::number(1));
 	_page_ = 1;
 	Report::SetBookVec();
+	on_ButtonSortConfirm_clicked();
 	SetData();
 }
 void ReportWindow::on_ButtonPreviousPage_clicked()
@@ -130,7 +131,6 @@ void ReportWindow::on_ButtonPreviousPage_clicked()
 		SetData();
 		ui.LineEditPage->setText(QString::number(_page_));
 	}
-	
 }
 void ReportWindow::on_ButtonNextPage_clicked()
 {
@@ -163,4 +163,36 @@ void ReportWindow::on_LineEditPage_returnPressed()
 		_page_ = page;
 		SetData();
 	}
+}
+void ReportWindow::on_ButtonSortConfirm_clicked()
+{
+	string key;
+	if (ui.RadioName->isChecked())
+	{
+		key = "name";
+	}
+	if (ui.RadioQty->isChecked())
+	{
+		key = "qty";
+	}
+	if (ui.RadioDateAdded->isChecked())
+	{
+		key = "date_added";
+	}
+	if (ui.RadioRetail->isChecked())
+	{
+		key = "retail";
+	}
+	if (ui.RadioWholesale->isChecked())
+	{
+		key = "wholesale";
+	}
+	if (ui.RadioBackward->isChecked())
+	{
+		key = string("-") + key;
+	}
+	Report::Sort(key);
+	_page_ = 1;
+	ui.LineEditPage->setText(QString::number(1));
+	SetData();
 }

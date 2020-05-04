@@ -81,6 +81,8 @@ void ManageWindow::on_ButtonDelete_clicked()
 		case QMessageBox::Yes:
 		{
 			Management::Delete(current_it);
+			ui.ButtonSave->setEnabled(false);
+			ui.ButtonDelete->setEnabled(false);
 			QMessageBox success(QMessageBox::Information, "提示", "删除成功！");
 			success.exec();
 		}

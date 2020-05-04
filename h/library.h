@@ -83,6 +83,20 @@ public:
 class Report {
 public:
 	static void SetBookVec();
-	static void Sort(const char * key);
+	static void Sort(string &key);
 	static vector <shared_ptr<BookData>> _book_vec;
+};
+class SortMethod
+{
+public:
+	static bool NamePositive(const shared_ptr<BookData>& a, const shared_ptr<BookData>& b);
+	static bool NameBackward(const shared_ptr<BookData>& a, const shared_ptr<BookData>& b);
+	static bool DateAddedPositive(const shared_ptr<BookData>& a, const shared_ptr<BookData>& b);
+	static bool DateAddedBackward(const shared_ptr<BookData>& a, const shared_ptr<BookData>& b);
+	static bool QtyPositive(const shared_ptr<BookData>& a, const shared_ptr<BookData>& b);
+	static bool QtyBackward(const shared_ptr<BookData>& a, const shared_ptr<BookData>& b);
+	static bool RetailPositive(const shared_ptr<BookData>& a, const shared_ptr<BookData>& b);
+	static bool RetailBackward(const shared_ptr<BookData>& a, const shared_ptr<BookData>& b);
+	static bool WholesalePositive(const shared_ptr<BookData>& a, const shared_ptr<BookData>& b);
+	static bool WholesaleBackward(const shared_ptr<BookData>& a, const shared_ptr<BookData>& b);
 };
