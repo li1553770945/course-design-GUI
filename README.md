@@ -1,7 +1,7 @@
 # <center>《面向对象程序设计课程设计》报告 </center>
 ### <center>FIVESTAR图书管理系统的设计与实现</center>
-[![](https://badgen.net/github/release/li1553770945/course-design-GUI)](https://github.com/li1553770945/course-design-GUI/releases)
-![](https://badgen.net/github/stars/li1553770945/course-design-GUI/)
+[![](https://img.shields.io/github/v/release/li1553770945/course-design-GUI?include_prereleases)](https://github.com/li1553770945/course-design-GUI/releases)
+![](https://img.shields.io/github/stars/li1553770945/course-design-GUI)
 
   - [一、程序的主要功能](#1)
   - [二、系统总框架图](#2)
