@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>1015</width>
+    <height>734</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -132,6 +132,21 @@
         <string>库存</string>
        </property>
       </column>
+      <column>
+       <property name="text">
+        <string>零售价</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>批发价</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>进货日期</string>
+       </property>
+      </column>
      </widget>
     </item>
    </layout>
@@ -141,7 +156,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
+     <width>1015</width>
      <height>26</height>
     </rect>
    </property>

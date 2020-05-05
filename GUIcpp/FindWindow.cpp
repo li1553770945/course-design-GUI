@@ -6,6 +6,8 @@ FindWindow::FindWindow(QWidget* parent) :QMainWindow(parent)
 {
 	ui.setupUi(this);
 	setAttribute(Qt::WA_DeleteOnClose);
+	ui.Table->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+	ui.Table->horizontalHeader()->setSectionResizeMode(0, QHeaderView::ResizeToContents);
 	
 }
 void FindWindow::closeEvent(QCloseEvent* event)
@@ -53,11 +55,14 @@ void  FindWindow::SetTable()
 		ui.Table->setItem(row, 2, new QTableWidgetItem(QString::fromLocal8Bit(book->GetAuth())));
 		ui.Table->setItem(row, 3, new QTableWidgetItem(QString::fromLocal8Bit(book->GetPub())));
 		ui.Table->setItem(row, 4, new QTableWidgetItem(QString::number(book->GetQty(),10)));
+		ui.Table->setItem(row, 5, new QTableWidgetItem(QString::number(book->GetRetail(), 10,2)));
+		ui.Table->setItem(row, 6, new QTableWidgetItem(QString::number(book->GetWholesale(), 10,2)));
+		ui.Table->setItem(row, 7, new QTableWidgetItem(QString(book->GetDateAdded())));
 		row++;
 	}
 	for (int i = 0; i < row; i++)
 	{
-		for (int j = 0; j < 5; j++)
+		for (int j = 0; j < 8; j++)
 		{
 			ui.Table->item(i, j)->setTextAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
 		}

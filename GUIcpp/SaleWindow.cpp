@@ -209,13 +209,50 @@ void SaleWindow::SonClose(std::string name)
 		find_window = NULL;
 	}
 }
-void SaleWindow::on_TableCart_cellChanged(int row, int column)
+void SaleWindow::on_TableCart_cellChanged(int row,int column)
 {
-	QMessageBox box(QMessageBox::Information, "提示", "您的购买量已经超过库存！");
-	box.exec();
+	QByteArray ba=ui.TableCart->item(row, column)->text().toLatin1();
+	int num = my_atoi(ba.data());
+	if (num <= 0)
+	{
+		QMessageBox box(QMessageBox::Information, "提示", "数量必须为大于0的整数！");
+		box.exec();
+		ui.TableCart->disconnect(SIGNAL(cellChanged(int, int)));
+		ui.TableCart->setItem(row, 2, new QTableWidgetItem(QString::number(_sale_.GetNum(row))));//还原用户更改
+		ui.TableCart->item(row, 2)->setTextAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+		connect(ui.TableCart, SIGNAL(cellChanged(int, int)), this, SLOT(on_TableCart_cellChanged(int, int)));
+		return;
+	}
+	if (_sale_.ChangeItem(row, num))
+	{
+	
+		ui.TableCart->disconnect(SIGNAL(cellChanged(int, int)));
+		ui.TableCart->setItem(row, 3, new QTableWidgetItem(QString::number(_sale_.GetRetail(row)*num,10,2)));//修正总价
+		ui.TableCart->item(row, 3)->setTextAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+		connect(ui.TableCart, SIGNAL(cellChanged(int, int)), this, SLOT(on_TableCart_cellChanged(int, int)));
+		ui.Sum->setText(QString::number(_sale_.GetSum()));
+		ui.SumFaxed->setText(QString::number(_sale_.GetSumFaxed()));
+		return;
+	}
+	else
+	{
+		QMessageBox box(QMessageBox::Information, "提示", "您的购买量已经超过库存！");
+		box.exec();
+		ui.TableCart->disconnect(SIGNAL(cellChanged(int, int)));
+		ui.TableCart->setItem(row, 2, new QTableWidgetItem(QString::number(_sale_.GetNum(row))));//还原用户更改
+		ui.TableCart->item(row, 2)->setTextAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+		connect(ui.TableCart, SIGNAL(cellChanged(int, int)), this, SLOT(on_TableCart_cellChanged(int, int)));
+		return;
+	}
 }
 void SaleWindow::on_ButtonClear_clicked()
 {
+	if (_sale_.IsEmpty())
+	{
+		QMessageBox box(QMessageBox::Information, "提示", "当前购物车为空！");
+		box.exec();
+		return;
+	}
 	QMessageBox box(QMessageBox::Warning, "警告", "您确定要放弃支付并清空购物车么？该操作不可恢复！",QMessageBox::Yes|QMessageBox::No);
 	switch (box.exec())
 	{
