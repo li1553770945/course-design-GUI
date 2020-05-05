@@ -1,6 +1,7 @@
 # <center>《面向对象程序设计课程设计》报告 </center>
 ### <center>FIVESTAR图书管理系统的设计与实现</center>
-
+[![](https://badgen.net/github/release/li1553770945/course-design-GUI)](https://github.com/li1553770945/course-design-GUI/releases)
+![](https://badgen.net/github/stars/li1553770945/course-design-GUI/)
 
   - [一、程序的主要功能](#1)
   - [二、系统总框架图](#2)
@@ -23,6 +24,78 @@
 + ### 报表模块  
   可以查看当前书库所有的书，并支持显示部分列，支持按任意列排序
 <h2 id=2>二、系统总框架图</h2>
+
+### 目录结构
+```
+│  .gitattributes  
+│  .gitignore  
+│  README.md   说明文档
+│  课设GUI.sln  
+│  课设GUI.vcxproj  
+│  课设GUI.vcxproj.filters  
+│  课设GUI.vcxproj.user  
+│  
+├─cpp  存储数据层的实现cpp文件
+│      BookData.cpp  BookData类的实现
+│      global.cpp  全局函数和类的实现
+│      main.cpp    主函数
+│      Management.cpp  Management类的实现，管理模块数据层
+│      Report.cpp  Report类实现，报表模块数据层
+│      Sale.cpp   销售模块数据层
+│      TitleInfo.cpp
+│      
+├─GUIcpp   GUI层的实现cpp文件
+│      AboutWindow.cpp
+│      BookInfoWindow.cpp
+│      FindWindow.cpp
+│      MainWindow.cpp
+│      ManageWindow.cpp
+│      ReportWindow.cpp
+│      SaleWindow.cpp
+│      
+├─GUIh  GUI层头文件
+│      AboutWindow.h
+│      BookInfoWindow.h
+│      FindWindow.h
+│      MainWindow.h
+│      ManageWindow.h
+│      ReportWindow.h
+│      SaleWindow.h
+│      
+├─h   数据层头文件实现
+│      global.h
+│      library.h
+│      
+├─qrc  资源文件
+│  │  About.qrc
+│  │  MainWindow.qrc
+│  │  qt_zh_CN.qm  中文翻译
+│  │  
+│  └─image
+│          profile.jpg 关于里面的头像
+│          
+├─ui
+│      AboutWindow.ui
+│      BookInfoWindow.ui
+│      FindWindow.ui
+│      MainWindow.ui
+│      ManageWindow.ui
+│      ReportWindow.ui
+│      SaleWindow.ui
+│      
+└─UnitTest
+    book.data
+    pch.cpp
+    pch.h
+    UnitTest.vcxproj
+    UnitTest.vcxproj.filters
+    UnitTest.vcxproj.user
+    UnitTestGlobal.cpp
+    UnitTestLibrary.cpp
+    
+```              
+
+  
 <h2 id=3>三、系统各个类的说明</h2> 
 
 <h2 id=4>四、模块分析</h2>

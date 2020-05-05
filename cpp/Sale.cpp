@@ -95,3 +95,22 @@ void Sale::Clear()
 	_cart_.clear();
 	_sum_ = 0;
 }
+bool Sale::ChangeItem(int row,int num)
+{
+	if (num > _cart_[row]._book_ptr_->GetQty())
+		return false;
+	else
+	{
+		_sum_ += (num - _cart_[row]._num_) * (_cart_[row]._book_ptr_->GetRetail());
+		_cart_[row]._num_ = num;
+		return true;
+	}
+}
+int Sale::GetNum(int row)
+{
+	return _cart_[row]._num_;
+}
+int Sale::GetRetail(int row)
+{
+	return _cart_[row]._book_ptr_->GetRetail();
+}
