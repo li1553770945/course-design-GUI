@@ -2,6 +2,7 @@
 ### <center>FIVESTAR图书管理系统的设计与实现</center>
 [![](https://img.shields.io/github/v/release/li1553770945/course-design-GUI?include_prereleases)](https://github.com/li1553770945/course-design-GUI/releases)
 ![](https://img.shields.io/github/stars/li1553770945/course-design-GUI)
+[![](https://img.shields.io/github/license/li1553770945/course-design-GUI)](https://github.com/li1553770945/course-design-GUI/blob/master/LICENSE)
 
   - [一、程序的主要功能](#1)
   - [二、系统总框架图](#2)
