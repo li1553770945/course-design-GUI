@@ -187,9 +187,21 @@ void MainWindow::CloseSon(std::string name)
 		report_window = NULL;
 	}
 }
-void MainWindow::on_About_triggered()
+void MainWindow::on_ActionAbout_triggered()
 {
 	AboutWindow* about_window = new AboutWindow;
 	about_window->exec();
+}
+void MainWindow::on_ActionSave_triggered()
+{
+	_dialog_ = new QProgressDialog("正在保存文件...请勿关闭程序或您的计算机", 0, 0, 0);
+	_dialog_->setWindowTitle("保存文件");
+	SaveFileThread thread;
+	connect(&thread, SIGNAL(ProcessEnd()), this, SLOT(CloseProcess()));
+	thread.start();
+	_dialog_->exec();
+	thread.wait();
+	QMessageBox box(QMessageBox::Information, "提示", "保存成功！");
+	box.exec();
 }
 
