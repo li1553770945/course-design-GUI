@@ -65,7 +65,9 @@ public:
 	bool ChangeItem(int row,int num);
 	void Clear();
 	int GetNum(int row);
-	int GetRetail(int row);
+	double GetRetail(int row);
+	int GetQty(int row);
+	void DeleteItem(int row);
 private:
 	vector <ShoppingItem> _cart_;//¹ºÎï³µ
 	static double _fax_;

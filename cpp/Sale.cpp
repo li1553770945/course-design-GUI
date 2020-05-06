@@ -110,7 +110,17 @@ int Sale::GetNum(int row)
 {
 	return _cart_[row]._num_;
 }
-int Sale::GetRetail(int row)
+double Sale::GetRetail(int row)
 {
 	return _cart_[row]._book_ptr_->GetRetail();
+}
+int Sale::GetQty(int row)
+{
+	return _cart_[row]._book_ptr_->GetQty();
+}
+void Sale::DeleteItem(int row)
+{
+	cout << row;
+	_sum_ -= _cart_[row]._num_ * _cart_[row]._book_ptr_->GetRetail();
+	_cart_.erase(_cart_.begin()+row);
 }

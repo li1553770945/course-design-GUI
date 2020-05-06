@@ -13,8 +13,8 @@ int main(int argc, char *argv[])
 	translator.load("qrc/qt_zh_CN");
 	a.installTranslator(&translator);
 	w.show();
-	////用于增加测试书，慎重使用！
-	/*for (int i = 1; i <= 1000; i++)
+	//用于增加测试书，慎重使用！
+	/*for (int i = 1; i <= 100; i++)
 	{
 		BookData* book = new BookData;
 		char s[10];
