@@ -335,7 +335,7 @@
       </column>
       <column>
        <property name="text">
-        <string>数量</string>
+        <string>数量(双击数字可直接修改)</string>
        </property>
        <property name="textAlignment">
         <set>AlignCenter</set>

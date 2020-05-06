@@ -11,6 +11,7 @@ ReportWindow::ReportWindow(QWidget* parent) :QMainWindow(parent)
 }
 void ReportWindow::closeEvent(QCloseEvent* event)
 {
+	ui.Table->clearContents();
 	emit Close(std::string("report"));
 }
 void ReportWindow::on_CheckBoxName_clicked()

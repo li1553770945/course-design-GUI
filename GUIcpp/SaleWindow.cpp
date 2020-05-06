@@ -13,7 +13,7 @@
 SaleWindow::SaleWindow(QWidget* parent)
 	: QMainWindow(parent)
 {
-	setAttribute(Qt::WA_DeleteOnClose);
+	this->setAttribute(Qt::WA_DeleteOnClose);
 	ui.setupUi(this);
 	ui.Fax->setText(QString::number(Sale::GetFax(), 10, 2));
 	select = false;
@@ -41,12 +41,14 @@ void SaleWindow::on_Confirm_clicked()
 }
 void SaleWindow::closeEvent(QCloseEvent* event)
 {
+
 	if (ui.TableCart->rowCount() != 0)
 	{
 		QMessageBox box(QMessageBox::Warning, "警告", "您的购物车有待结算的物品，退出后将不会保存！您确定要退出么？", QMessageBox::Yes | QMessageBox::No);
 		switch (box.exec())
 		{
 		case QMessageBox::Yes:
+			ui.TableCart->clearContents();
 			emit Close(std::string("sale"));
 			break;
 		default:
@@ -55,6 +57,7 @@ void SaleWindow::closeEvent(QCloseEvent* event)
 	}
 	else
 	{
+		ui.TableCart->clearContents();
 		emit Close(std::string("sale"));
 	}
 	
@@ -209,7 +212,7 @@ void SaleWindow::SonClose(std::string name)
 		find_window = NULL;
 	}
 }
-void SaleWindow::on_TableCart_cellChanged(int row,int column)
+void SaleWindow::on_TableCart_cellChanged(int row,int column)//双击修改数量
 {
 	QByteArray ba=ui.TableCart->item(row, column)->text().toLatin1();
 	int num = my_atoi(ba.data());
@@ -236,7 +239,7 @@ void SaleWindow::on_TableCart_cellChanged(int row,int column)
 	}
 	else
 	{
-		QMessageBox box(QMessageBox::Information, "提示", "您的购买量已经超过库存！");
+		QMessageBox box(QMessageBox::Information, "提示",QString("您的购买量已经超过库存")+QString::number(_sale_.GetQty(row))+QString("!"));
 		box.exec();
 		ui.TableCart->disconnect(SIGNAL(cellChanged(int, int)));
 		ui.TableCart->setItem(row, 2, new QTableWidgetItem(QString::number(_sale_.GetNum(row))));//还原用户更改
@@ -267,4 +270,26 @@ void SaleWindow::on_ButtonClear_clicked()
 		ui.Qty->setText("");
 		Select(false);
 	}
+}
+void SaleWindow::on_TableCart_customContextMenuRequested(const QPoint &pos)
+{
+	QModelIndex index = ui.TableCart->indexAt(pos);
+	int row = index.row(); // 获取鼠标所在行
+	_delete_row_ = row;
+	if (row == -1)
+		return;
+	QMenu *menu=new QMenu(this);
+	QAction *action=new QAction("删除",this);
+	connect(action, SIGNAL(triggered()), this, SLOT(Delete()));
+	menu->addAction(action);
+	menu->exec(QCursor::pos());
+	
+	
+}
+void SaleWindow::Delete()
+{
+	_sale_.DeleteItem(_delete_row_);
+	ui.TableCart->removeRow(_delete_row_);
+	ui.Sum->setText(QString::number(_sale_.GetSum()));
+	ui.SumFaxed->setText(QString::number(_sale_.GetSumFaxed()));
 }
