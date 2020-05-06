@@ -77,7 +77,7 @@ void SaleWindow::on_ButtonLibrary_clicked()
 {
 	if (report_window == NULL)
 	{
-		report_window = new ReportWindow;
+		report_window = new ReportWindow(this);
 		connect(report_window, SIGNAL(Close(std::string)), this, SLOT(SonClose(std::string)));
 		report_window->show();
 	}
@@ -191,7 +191,7 @@ void SaleWindow::on_ButtonFind_clicked()
 {
 	if (find_window == NULL)
 	{
-		find_window = new FindWindow;
+		find_window = new FindWindow(this);
 		connect(find_window, SIGNAL(Close(std::string)), this, SLOT(SonClose(std::string)));
 		find_window->show();
 	}

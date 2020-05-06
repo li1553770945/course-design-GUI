@@ -66,6 +66,7 @@
       <OutputFile>$(OutDir)\$(ProjectName).exe</OutputFile>
       <GenerateDebugInformation>DebugFull</GenerateDebugInformation>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <Profile>true</Profile>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -121,6 +122,7 @@
     <QtMoc Include="GUIh\ReportWindow.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="resource.h" />
     <QtMoc Include="GUIh\AboutWindow.h" />
     <QtMoc Include="GUIh\BookInfoWindow.h" />
     <QtMoc Include="GUIh\FindWindow.h" />
@@ -133,6 +135,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="README.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="课设GUI.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="qrc\image\favicon.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

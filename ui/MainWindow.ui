@@ -25,6 +25,10 @@
   <property name="windowTitle">
    <string>FIVESTAR图书管理系统</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="../qrc/MainWindow.qrc">
+    <normaloff>:/img/image/favicon.ico</normaloff>:/img/image/favicon.ico</iconset>
+  </property>
   <widget class="QWidget" name="centralWidget">
    <property name="minimumSize">
     <size>
