@@ -91,7 +91,7 @@ void MainWindow::on_ButtonSale_clicked()
 	if (sale_window == NULL)//如果为空，说明还没有打开过这个窗口，那么就新建一个并显示
 	{
 		
-		sale_window = new SaleWindow;
+		sale_window = new SaleWindow(this);
 		connect(sale_window, SIGNAL(Close(std::string)), this, SLOT(CloseSon(std::string)));
 		sale_window->show();
 		
@@ -114,7 +114,7 @@ void MainWindow::on_ButtonManage_clicked()
 	if (manage_window == NULL)
 	{
 
-		manage_window = new ManageWindow;
+		manage_window = new ManageWindow(this);
 		connect(manage_window, SIGNAL(Close(std::string)), this, SLOT(CloseSon(std::string)));
 		manage_window->show();
 
@@ -129,7 +129,7 @@ void MainWindow::on_ButtonReport_clicked()
 {
 	if (report_window == NULL)
 	{
-		report_window = new ReportWindow;
+		report_window = new ReportWindow(this);
 		connect(report_window, SIGNAL(Close(std::string)), this, SLOT(CloseSon(std::string)));
 		report_window->show();
 	}
