@@ -12,6 +12,7 @@ FindWindow::FindWindow(QWidget* parent) :QMainWindow(parent)
 }
 void FindWindow::closeEvent(QCloseEvent* event)
 {
+	ui.Table->clearContents();
 	emit Close(std::string("find"));
 }
 void FindWindow::on_ButtonFind_clicked()

@@ -41,12 +41,14 @@ void SaleWindow::on_Confirm_clicked()
 }
 void SaleWindow::closeEvent(QCloseEvent* event)
 {
+
 	if (ui.TableCart->rowCount() != 0)
 	{
 		QMessageBox box(QMessageBox::Warning, "警告", "您的购物车有待结算的物品，退出后将不会保存！您确定要退出么？", QMessageBox::Yes | QMessageBox::No);
 		switch (box.exec())
 		{
 		case QMessageBox::Yes:
+			ui.TableCart->clearContents();
 			emit Close(std::string("sale"));
 			break;
 		default:
@@ -55,6 +57,7 @@ void SaleWindow::closeEvent(QCloseEvent* event)
 	}
 	else
 	{
+		ui.TableCart->clearContents();
 		emit Close(std::string("sale"));
 	}
 	

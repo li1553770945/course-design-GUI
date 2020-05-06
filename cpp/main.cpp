@@ -1,9 +1,6 @@
 #include "../GUIh/MainWindow.h"
-#include <QtWidgets/QApplication>
-#include "../h/library.h"
-#include "qmessagebox.h"
 #include <qtranslator.h>
-#include "QtTest/qtest.h"
+//#include <vld.h>
 using namespace std;
 int main(int argc, char *argv[])
 {
@@ -28,6 +25,7 @@ int main(int argc, char *argv[])
 		book->SetRetail(10.5);
 		book->SetWholesale(10);
 		Management::Add(book);
+
 	}*/
 	return a.exec();
 }

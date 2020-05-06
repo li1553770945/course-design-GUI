@@ -7,7 +7,6 @@
 #include <qmessagebox.h>
 #include <QTextCodec>
 #include <QCloseEvent> 
-#include <qdebug.h>
 #include <io.h>
 #include <QProgressDialog>
 #include <qthread.h>
@@ -20,7 +19,7 @@ MainWindow::MainWindow(QWidget *parent)
 	report_window=NULL;
 	LoadFile();
 	ui.setupUi(this);
-	setAttribute(Qt::WA_DeleteOnClose);
+	this->setAttribute(Qt::WA_DeleteOnClose);
 }
 void  OpenFileThread::run()
 {
@@ -50,7 +49,7 @@ void MainWindow::LoadFile()
 {
 	if(AccessFile())
 	{ 
-		_dialog_ = new QProgressDialog("正在读取文件...请勿关闭程序或您的计算机", 0, 0, 0);
+		_dialog_ = new QProgressDialog("正在读取文件...请勿关闭程序或您的计算机", 0, 0, 0,this);
 		_dialog_->setWindowTitle("读取文件");
 		OpenFileThread thread;
 		connect(&thread, SIGNAL(ProcessEnd()), this, SLOT(CloseProcess()));
@@ -158,7 +157,7 @@ void MainWindow::closeEvent(QCloseEvent* event)
 	{
 	case QMessageBox::Yes:
 	{
-		_dialog_ = new QProgressDialog("正在保存文件...请勿关闭程序或您的计算机", 0, 0, 0);
+		_dialog_ = new QProgressDialog("正在保存文件...请勿关闭程序或您的计算机", 0, 0, 0,this);
 		_dialog_->setWindowTitle("保存文件");
 		SaveFileThread thread;
 		connect(&thread, SIGNAL(ProcessEnd()), this, SLOT(CloseProcess()));
@@ -194,7 +193,7 @@ void MainWindow::on_ActionAbout_triggered()
 }
 void MainWindow::on_ActionSave_triggered()
 {
-	_dialog_ = new QProgressDialog("正在保存文件...请勿关闭程序或您的计算机", 0, 0, 0);
+	_dialog_ = new QProgressDialog("正在保存文件...请勿关闭程序或您的计算机", 0, 0, 0,this);
 	_dialog_->setWindowTitle("保存文件");
 	SaveFileThread thread;
 	connect(&thread, SIGNAL(ProcessEnd()), this, SLOT(CloseProcess()));
@@ -204,4 +203,3 @@ void MainWindow::on_ActionSave_triggered()
 	QMessageBox box(QMessageBox::Information, "提示", "保存成功！");
 	box.exec();
 }
-
