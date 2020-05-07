@@ -98,7 +98,7 @@
     UnitTestLibrary.cpp
     
 ```              
-![](http://assets.processon.com/chart_image/5eae92cf6376897466a21714.png)
+<img src="http://assets.processon.com/chart_image/5eae92cf6376897466a21714.png">
   
 <h2 id=3>三、系统各个类的说明</h2> 
 
