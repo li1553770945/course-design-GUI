@@ -5,9 +5,7 @@
 #include "../GUIh/AboutWindow.h"
 #include "../h/global.h"
 #include <qmessagebox.h>
-#include <QTextCodec>
 #include <QCloseEvent> 
-#include <io.h>
 #include <QProgressDialog>
 #include <qthread.h>
 # pragma execution_character_set("utf-8")

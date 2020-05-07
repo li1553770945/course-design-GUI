@@ -1,13 +1,10 @@
 #include "../GUIh/SaleWindow.h"
 #include <qevent.h>
 #include <qmessagebox.h>
-#include <qdebug.h>
 #include "../h/library.h"
-#include <iostream>
 #include "../h/global.h"
 #include "../GUIh//BookInfoWindow.h"
 #include "../GUIh/ReportWindow.h"
-#include "../h/global.h"
 #include "../GUIh/FindWindow.h"
 # pragma execution_character_set("utf-8")
 SaleWindow::SaleWindow(QWidget* parent)
